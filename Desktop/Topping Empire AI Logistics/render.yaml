@@ -3,7 +3,6 @@ services:
     name: topping-empire-ai-logistics
     env: node
     rootDir: .
-    buildCommand: "npm install"
     startCommand: "npm start"
     envVars:
       - key: NODE_VERSION
