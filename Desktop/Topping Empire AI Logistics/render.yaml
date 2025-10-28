@@ -2,11 +2,9 @@ services:
   - type: web
     name: topping-empire-ai-logistics
     env: node
-    region: oregon
-    plan: free
+    rootDir: .
     buildCommand: npm install
     startCommand: npm start
-    rootDir: .
     envVars:
       - key: NODE_VERSION
         value: 20
