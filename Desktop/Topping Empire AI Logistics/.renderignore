@@ -1,0 +1,8 @@
+# Render ignore file
+node_modules/
+.DS_Store
+*.log
+.env
+.render/
+src/
+components/
