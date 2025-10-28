@@ -1,4 +1,4 @@
-# Render ignore file
+# Render ignore file - Exclude unnecessary files
 node_modules/
 .DS_Store
 *.log
@@ -6,3 +6,5 @@ node_modules/
 .render/
 src/
 components/
+*.tmp
+*.cache
