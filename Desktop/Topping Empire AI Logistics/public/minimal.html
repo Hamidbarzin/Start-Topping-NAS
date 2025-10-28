@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>مسیر راه شخصی — Barzin Holding</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .home-button {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #d4af37, #e5c45e);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8em;
+      box-shadow: 0 8px 24px rgba(212,175,55,.4);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 999;
+      text-decoration: none;
+    }
+    .home-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 32px rgba(212,175,55,.6);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" style="max-width:1040px; margin:0 auto; padding:28px 18px 64px">
+    <header style="display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap:wrap; margin-bottom:20px">
+      <div class="brand" style="display:flex; align-items:center; gap:14px">
+        <div class="logo" style="width:40px;height:40px;border-radius:12px; background:linear-gradient(135deg,#d4af37,#e5c45e); box-shadow:0 4px 18px rgba(212,175,55,.35)"></div>
+        <div>
+          <h1 style="margin:0;font-weight:800;letter-spacing:-.2px; font-size:1.35rem">Barzin Holding — مسیر راه شخصی تا ۲۰۳۰</h1>
+          <div style="color:#b9b9c6; font-size:.95rem">نسخهٔ مینیمال، مشکی و طلایی</div>
+        </div>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap">
+        <button style="appearance:none; border:1px solid rgba(229,196,94,.25); background:linear-gradient(180deg,#1a1a21,#121219); color:#e9e9ee; padding:10px 14px; border-radius:12px; cursor:pointer; font-weight:600; font-size:.9em; transition:.2s;">ذخیره</button>
+        <button style="appearance:none; border:1px solid rgba(229,196,94,.25); background:linear-gradient(180deg,#1a1a21,#121219); color:#e9e9ee; padding:10px 14px; border-radius:12px; cursor:pointer; font-weight:600; font-size:.9em; transition:.2s;" onclick="window.print()">چاپ</button>
+      </div>
+    </header>
+
+    <div class="grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:16px">
+      <p style="grid-column: 1/-1; text-align: center; color: #b9b9c6; padding: 40px; background: linear-gradient(180deg, rgba(26,26,33,.75), rgba(18,18,25,.92)); border: 1px solid rgba(229,196,94,.12); border-radius: 16px;">
+        نسخه مینیمال در حال به‌روزرسانی... برای مشاهده محتوا به صفحه اصلی یا سایر داشبوردها بروید.
+      </p>
+    </div>
+  </div>
+
+  <!-- Home Button -->
+  <a href="/" class="home-button" title="برگشت به خانه">🏠</a>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>
+

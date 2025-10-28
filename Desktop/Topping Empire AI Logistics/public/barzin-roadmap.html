@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>مسیر راه شخصی — Barzin Holding</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <meta name="color-scheme" content="dark" />
+  <style>
+    :root{
+      --bg:#0b0b0f;           /* مشکی عمیق */
+      --panel:#121219;        /* پنل تیره */
+      --soft:#1a1a24;         /* مرز/هاور */
+      --text:#e9e9ee;         /* متن اصلی */
+      --muted:#b9b9c6;        /* متن فرعی */
+      --gold:#d4af37;         /* طلایی اصلی */
+      --gold-2:#e5c45e;       /* طلایی روشن */
+      --ok:#19c37d;           /* سبز تایید */
+      --warn:#ffb020;         /* هشدار */
+      --bad:#ff5c5c;          /* خطا */
+      --radius:16px;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:'Vazirmatn',system-ui,-apple-system,Segoe UI,Roboto,Arial; color:var(--text);
+      background:
+        radial-gradient(1100px 600px at 120% -10%, rgba(212,175,55,.15), transparent 60%),
+        radial-gradient(1000px 500px at -20% 120%, rgba(229,196,94,.12), transparent 60%),
+        var(--bg);
+    }
+
+    .wrap{max-width:1040px; margin:0 auto; padding:28px 18px 64px}
+
+    header{
+      display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+      margin-bottom:20px
+    }
+    .brand{display:flex; align-items:center; gap:14px}
+    .logo{width:40px;height:40px;border-radius:12px; background:linear-gradient(135deg,var(--gold),var(--gold-2)); box-shadow:0 4px 18px rgba(212,175,55,.35)}
+    h1{margin:0;font-weight:800;letter-spacing:-.2px; font-size:1.35rem}
+    .subtitle{color:var(--muted); font-size:.95rem}
+
+    .toolbar{display:flex; gap:10px; flex-wrap:wrap}
+    .btn{appearance:none; border:1px solid rgba(229,196,94,.25); background:linear-gradient(180deg,#1a1a21,#121219);
+      color:var(--text); padding:10px 14px; border-radius:12px; cursor:pointer; font-weight:600;
+      transition:.2s; box-shadow:inset 0 0 0 1px rgba(229,196,94,.08)}
+    .btn:hover{transform:translateY(-1px); box-shadow:0 8px 20px rgba(0,0,0,.35), inset 0 0 0 1px rgba(229,196,94,.18)}
+    .btn.gold{border-color:transparent; color:#111; background:linear-gradient(135deg,var(--gold),var(--gold-2)); box-shadow:0 8px 24px rgba(229,196,94,.28)}
+
+    .grid{display:grid; grid-template-columns:1fr; gap:14px}
+    @media(min-width:840px){ .grid{grid-template-columns:1fr 1fr} }
+
+    .card{
+      background:linear-gradient(180deg, rgba(26,26,33,.75), rgba(18,18,25,.92));
+      border:1px solid rgba(229,196,94,.12);
+      border-radius:var(--radius); padding:18px 16px; box-shadow:var(--shadow);
+      position:relative; overflow:hidden; transition:.3s
+    }
+    .card:before{content:""; position:absolute; inset:0; background:
+      linear-gradient(90deg, rgba(229,196,94,.06), transparent 35%, transparent 65%, rgba(229,196,94,.05));
+      pointer-events:none}
+    .card.achieved{border-color:var(--ok); box-shadow:0 10px 35px rgba(25,195,125,.2)}
+
+    .card h2{margin:0 0 10px; font-size:1.05rem; display:flex; align-items:center; gap:8px}
+    .checkmark{display:none; color:var(--ok); font-size:1.2em}
+    .card.achieved .checkmark{display:inline-block; animation:checkIn .4s}
+    @keyframes checkIn{
+      0%{transform:scale(0) rotate(-180deg); opacity:0}
+      100%{transform:scale(1) rotate(0); opacity:1}
+    }
+
+    .hint{color:var(--muted); font-size:.9rem}
+
+    .pill{display:inline-flex; align-items:center; gap:6px; font-weight:700; font-size:.85rem; 
+      padding:6px 10px; border-radius:999px; background:rgba(229,196,94,.12); color:var(--gold)}
+
+    ul.list{list-style:none; padding:0; margin:10px 0 0}
+    ul.list li{padding:10px 10px; border-radius:12px; background:#0f0f15; border:1px solid rgba(229,196,94,.08); margin-top:8px}
+
+    .kpi{display:flex; align-items:center; justify-content:space-between; gap:10px}
+    .kpi small{color:var(--muted)}
+
+    /* Progress Bar */
+    .progress-section{margin-top:12px; padding-top:12px; border-top:1px solid rgba(229,196,94,.1)}
+    .progress-control{display:flex; align-items:center; gap:10px; margin-bottom:8px}
+    .score-input{width:80px; padding:6px 10px; border:1px solid rgba(229,196,94,.2); background:rgba(11,11,15,.8); 
+      color:var(--gold); border-radius:8px; font-weight:700; text-align:center}
+    .score-input:focus{outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(212,175,55,.15)}
+    .progress-label{color:var(--muted); font-size:.9rem}
+    
+    .progress-bar-bg{width:100%; height:28px; background:#0f0f15; border-radius:14px; 
+      overflow:hidden; box-shadow:inset 0 2px 6px rgba(0,0,0,.4)}
+    .progress-bar-fill{height:100%; background:linear-gradient(90deg, var(--gold), var(--gold-2));
+      border-radius:14px; transition:width .5s ease; display:flex; align-items:center;
+      justify-content:center; color:#111; font-weight:700; font-size:.85rem; box-shadow:0 0 20px rgba(212,175,55,.4)}
+    
+    .status-text{margin-top:6px; font-size:.85rem; font-weight:600}
+    .status-text.completed{color:var(--ok)}
+    .status-text.progress{color:var(--warn)}
+    .status-text.starting{color:var(--muted)}
+
+    /* Notes System */
+    .notes-section{margin-top:12px}
+    .note-btn{background:rgba(229,196,94,.1); border:1px dashed rgba(229,196,94,.3); 
+      color:var(--gold); padding:6px 12px; border-radius:8px; cursor:pointer; font-size:.85rem; 
+      transition:.2s; width:100%; margin-bottom:8px}
+    .note-btn:hover{background:rgba(229,196,94,.15); border-color:rgba(229,196,94,.5)}
+    
+    .note-editor{display:none; margin-top:8px}
+    .note-editor.active{display:block}
+    .note-textarea{width:100%; min-height:60px; padding:8px; border:1px solid rgba(229,196,94,.2);
+      background:rgba(11,11,15,.8); color:var(--text); border-radius:8px; resize:vertical; 
+      font-family:inherit; font-size:.9rem}
+    .note-textarea:focus{outline:none; border-color:var(--gold); box-shadow:0 0 0 2px rgba(212,175,55,.1)}
+    
+    .note-preview{background:rgba(229,196,94,.08); padding:8px 12px; border-radius:8px; 
+      margin-top:8px; font-size:.85rem; color:var(--muted); border-right:3px solid var(--gold); 
+      max-height:60px; overflow:auto}
+    .note-actions{display:flex; gap:6px; margin-top:6px}
+    .note-actions button{flex:1; padding:6px; border-radius:6px; border:none; cursor:pointer; 
+      font-size:.8rem; transition:.2s}
+    .note-actions .save{background:var(--ok); color:#111}
+    .note-actions .cancel{background:var(--muted); color:var(--text)}
+
+    /* Banner */
+    .banner{display:none; background:linear-gradient(135deg, rgba(25,195,125,.2), rgba(25,195,125,.1));
+      border:2px solid var(--ok); border-radius:var(--radius); padding:16px 20px; margin-bottom:20px;
+      text-align:center; animation:slideDown .5s}
+    .banner.active{display:block}
+    @keyframes slideDown{from{opacity:0; transform:translateY(-20px)} to{opacity:1; transform:translateY(0)}}
+    .banner h3{margin:0 0 6px; color:var(--ok); font-size:1.2rem}
+    .banner p{margin:0; color:var(--muted); font-size:.95rem}
+
+    /* Chart */
+    .chart-section{background:linear-gradient(180deg, rgba(26,26,33,.75), rgba(18,18,25,.92));
+      border:1px solid rgba(229,196,94,.12); border-radius:var(--radius); padding:20px;
+      box-shadow:var(--shadow); margin-top:30px}
+    .chart-wrapper{position:relative; height:250px; margin-top:12px}
+
+    /* Focus Mode */
+    .focus-mode .notes-section,
+    .focus-mode .note-btn,
+    .focus-mode .note-preview,
+    .focus-mode .note-editor{display:none !important}
+
+    .soft{color:var(--muted)}
+
+    .section-title{display:flex; align-items:center; justify-content:space-between; margin:16px 0 6px}
+
+    .editable[contenteditable="true"]{outline:2px dashed rgba(229,196,94,.35); border-radius:10px; padding:6px;}
+
+    footer{margin-top:26px; color:var(--muted); text-align:center}
+
+    /* Tooltip */
+    .tooltip{position:relative; cursor:help}
+    .tooltip::before{content:attr(data-tip); position:absolute; bottom:100%; left:50%; transform:translateX(-50%);
+      background:rgba(11,11,15,.95); color:var(--gold); padding:6px 10px; border-radius:6px;
+      font-size:.8rem; white-space:nowrap; opacity:0; pointer-events:none; transition:opacity .2s;
+      border:1px solid rgba(229,196,94,.3); margin-bottom:6px; z-index:10}
+    .tooltip:hover::before{opacity:1}
+
+    /* Responsive */
+    @media (max-width: 768px){
+      .wrap{padding:16px 12px 40px}
+      header{flex-direction:column; align-items:flex-start}
+      .toolbar{width:100%}
+      .btn{flex:1; min-width:0}
+      .progress-control{flex-wrap:wrap}
+      .score-input{flex:0 0 60px}
+    }
+
+    /* Print */
+    @media print{
+      body{background:#000}
+      .btn, .toolbar{display:none !important}
+      .wrap{max-width:100%; padding:0}
+      .card{break-inside:avoid; box-shadow:none}
+      .note-editor{display:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" id="mainContent">
+    <div class="banner" id="milestoneBanner">
+      <h3>🎉 تبریک! شما به مایلستون رسیده‌اید!</h3>
+      <p>همه کارت‌های شما به 75% یا بیشتر رسیده‌اند. همچنان ادامه دهید!</p>
+    </div>
+
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1 id="title" class="editable" contenteditable="true">Barzin Holding — مسیر راه شخصی تا ۲۰۳۰</h1>
+          <div class="subtitle">نسخهٔ تعاملی با نمره‌دهی، یادداشت‌ها و چارت رشد</div>
+        </div>
+      </div>
+      <div class="toolbar">
+        <button class="btn gold" id="toggleEdit">حالت ویرایش</button>
+        <button class="btn" id="save">ذخیره در مرورگر</button>
+        <button class="btn" id="export">خروجی JSON</button>
+        <button class="btn" id="focusMode">حالت تمرکز</button>
+        <button class="btn" id="clearData">پاک کردن همه</button>
+        <button class="btn" onclick="window.print()">نسخه چاپ</button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- چشم‌انداز و ارزش‌ها -->
+      <section class="card" data-card="vision">
+        <div class="section-title">
+          <h2><span class="checkmark">✓</span>🎯 چشم‌انداز (Vision)</h2><span class="pill">۲۰۳۰</span>
+        </div>
+        <div id="vision" class="editable" contenteditable="true">
+          تبدیل Topping Courier به یکی از ۱۰ برند برتر لجستیک تکنولوژیک در کانادا با شبکهٔ بین‌المللی (EU/NA/APAC)، تجربهٔ مشتری ممتاز، و هویت داده‌محور.
+        </div>
+        <div class="progress-section">
+          <div class="progress-control">
+            <input type="number" min="0" max="100" class="score-input" placeholder="0-100" data-card="vision" />
+            <span class="progress-label">امتیاز پیشرفت:</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" data-bar="vision" style="width:0%">0%</div>
+          </div>
+          <div class="status-text starting" data-status="vision">⏳ شروع</div>
+        </div>
+        <div class="notes-section">
+          <button class="note-btn">📝 افزودن یادداشت</button>
+          <div class="note-editor">
+            <textarea class="note-textarea" placeholder="یادداشت خود را بنویسید..."></textarea>
+            <div class="note-actions">
+              <button class="save" onclick="saveNote(this)">ذخیره</button>
+              <button class="cancel" onclick="cancelNote(this)">لغو</button>
+            </div>
+          </div>
+          <div class="note-preview" data-note="vision"></div>
+        </div>
+      </section>
+
+      <!-- 30/60/90 -->
+      <section class="card" data-card="plan309060">
+        <div class="section-title"><h2><span class="checkmark">✓</span>🧭 برنامه ۳۰/۶۰/۹۰ روزه</h2><small class="soft">تمرکز عملیاتی سریع</small></div>
+        <div id="plan309060" class="editable" contenteditable="true">
+          <ul class="list">
+            <li><b>۳۰ روز:</b> نهایی‌سازی برندینگ ساده، صفحهٔ فرود، فرم سفارش GTA و تقویم بازاریابی LinkedIn/IG.</li>
+            <li><b>۶۰ روز:</b> قراردادهای اولیه با ۲ کارگو/ایرلاین + راه‌اندازی CRM و پیگیری لید.</li>
+            <li><b>۹۰ روز:</b> داشبورد KPI، فرآیندهای SOP عملیاتی، اولین مشتریان تکرارشونده.</li>
+          </ul>
+        </div>
+        <div class="progress-section">
+          <div class="progress-control">
+            <input type="number" min="0" max="100" class="score-input" placeholder="0-100" data-card="plan309060" />
+            <span class="progress-label">امتیاز پیشرفت:</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" data-bar="plan309060" style="width:0%">0%</div>
+          </div>
+          <div class="status-text starting" data-status="plan309060">⏳ شروع</div>
+        </div>
+        <div class="notes-section">
+          <button class="note-btn">📝 افزودن یادداشت</button>
+          <div class="note-editor">
+            <textarea class="note-textarea" placeholder="یادداشت خود را بنویسید..."></textarea>
+            <div class="note-actions">
+              <button class="save" onclick="saveNote(this)">ذخیره</button>
+              <button class="cancel" onclick="cancelNote(this)">لغو</button>
+            </div>
+          </div>
+          <div class="note-preview" data-note="plan309060"></div>
+        </div>
+      </section>
+
+      <!-- اهداف SMART -->
+      <section class="card" data-card="smart">
+        <div class="section-title"><h2><span class="checkmark">✓</span>📦 اهداف SMART فصل جاری</h2><small class="soft">۳ هدف پراثر</small></div>
+        <div id="smart" class="editable" contenteditable="true">
+          <ul class="list">
+            <li>دستیابی به <b>۱۰۰ لید معتبر</b> با CAC ≤ ۲۰۰ دلار تا پایان فصل.</li>
+            <li>رسیدن به <b>۸۵٪ تحویل به‌موقع</b> در سرویس‌های GTA و بین‌الملل.</li>
+            <li>امتیاز <b>NPS ≥ ۵۰</b> با ۲۰ بازخورد مستند از مشتریان.</li>
+          </ul>
+        </div>
+        <div class="progress-section">
+          <div class="progress-control">
+            <input type="number" min="0" max="100" class="score-input" placeholder="0-100" data-card="smart" />
+            <span class="progress-label">امتیاز پیشرفت:</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" data-bar="smart" style="width:0%">0%</div>
+          </div>
+          <div class="status-text starting" data-status="smart">⏳ شروع</div>
+        </div>
+        <div class="notes-section">
+          <button class="note-btn">📝 افزودن یادداشت</button>
+          <div class="note-editor">
+            <textarea class="note-textarea" placeholder="یادداشت خود را بنویسید..."></textarea>
+            <div class="note-actions">
+              <button class="save" onclick="saveNote(this)">ذخیره</button>
+              <button class="cancel" onclick="cancelNote(this)">لغو</button>
+            </div>
+          </div>
+          <div class="note-preview" data-note="smart"></div>
+        </div>
+      </section>
+
+      <!-- مایلستون‌های ۱۲ ماهه -->
+      <section class="card" data-card="milestones">
+        <div class="section-title"><h2><span class="checkmark">✓</span>🚀 مایلستون‌های ۱۲ ماهه</h2><small class="soft">Quarterly</small></div>
+        <div id="milestones" class="editable" contenteditable="true">
+          <ul class="list">
+            <li><b>Q1:</b> تکمیل e-Residency استونی و افتتاح حساب، راه‌اندازی MVP رزرو/کوئوت.</li>
+            <li><b>Q2:</b> ۳ قرارداد عملیاتی (EU/CA)، جذب ۲۰۰ مشتری B2B/SMB.</li>
+            <li><b>Q3:</b> ماژول AI Rate Shopper نسخه ۱ + یکپارچه‌سازی پرداخت امن.</li>
+            <li><b>Q4:</b> پوشش ۱۰ کشور اول، بودجه R&D پایدار، سودآوری عملیاتی.</li>
+          </ul>
+        </div>
+        <div class="progress-section">
+          <div class="progress-control">
+            <input type="number" min="0" max="100" class="score-input" placeholder="0-100" data-card="milestones" />
+            <span class="progress-label">امتیاز پیشرفت:</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" data-bar="milestones" style="width:0%">0%</div>
+          </div>
+          <div class="status-text starting" data-status="milestones">⏳ شروع</div>
+        </div>
+        <div class="notes-section">
+          <button class="note-btn">📝 افزودن یادداشت</button>
+          <div class="note-editor">
+            <textarea class="note-textarea" placeholder="یادداشت خود را بنویسید..."></textarea>
+            <div class="note-actions">
+              <button class="save" onclick="saveNote(this)">ذخیره</button>
+              <button class="cancel" onclick="cancelNote(this)">لغو</button>
+            </div>
+          </div>
+          <div class="note-preview" data-note="milestones"></div>
+        </div>
+      </section>
+
+      <!-- تمرکز هفتگی -->
+      <section class="card" data-card="weekly">
+        <div class="section-title"><h2><span class="checkmark">✓</span>📅 تمرکز هفتگی</h2><small class="soft">Top 5</small></div>
+        <div id="weekly" class="editable" contenteditable="true">
+          <ul class="list">
+            <li>۳ جلسه فروش برنامه‌ریزی‌شده با پیگیری ۲۴ ساعته</li>
+            <li>۲ محتوای ارزشمند (Case/How-to) در LinkedIn + IG</li>
+            <li>بهبود ۱ فرآیند عملیاتی (SOP کوتاه)</li>
+            <li>پیشروی فنی ۵٪ روی ماژول کلیدی</li>
+            <li>مکالمه راهبردی با یک شریک بین‌الملل</li>
+          </ul>
+        </div>
+        <div class="progress-section">
+          <div class="progress-control">
+            <input type="number" min="0" max="100" class="score-input" placeholder="0-100" data-card="weekly" />
+            <span class="progress-label">امتیاز پیشرفت:</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" data-bar="weekly" style="width:0%">0%</div>
+          </div>
+          <div class="status-text starting" data-status="weekly">⏳ شروع</div>
+        </div>
+        <div class="notes-section">
+          <button class="note-btn">📝 افزودن یادداشت</button>
+          <div class="note-editor">
+            <textarea class="note-textarea" placeholder="یادداشت خود را بنویسید..."></textarea>
+            <div class="note-actions">
+              <button class="save" onclick="saveNote(this)">ذخیره</button>
+              <button class="cancel" onclick="cancelNote(this)">لغو</button>
+            </div>
+          </div>
+          <div class="note-preview" data-note="weekly"></div>
+        </div>
+      </section>
+
+      <!-- عادت‌های روزانه -->
+      <section class="card" data-card="habits">
+        <div class="section-title"><h2><span class="checkmark">✓</span>🧠 عادت‌های روزانهٔ مدیرعامل</h2><small class="soft">انرژی، تمرکز، اجرا</small></div>
+        <div id="habits" class="editable" contenteditable="true">
+          <ul class="list">
+            <li>Deep Work ۹۰ دقیقه صبح (بدون پیام‌رسان)</li>
+            <li>۱ تماس مشتری + ۱ تماس شریک</li>
+            <li>ورزش کوتاه ۲۰ دقیقه + آب کافی</li>
+            <li>مرور شبانه ۱۰ دقیقه + ثبت ۱ درس آموخته</li>
+          </ul>
+        </div>
+        <div class="progress-section">
+          <div class="progress-control">
+            <input type="number" min="0" max="100" class="score-input" placeholder="0-100" data-card="habits" />
+            <span class="progress-label">امتیاز پیشرفت:</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" data-bar="habits" style="width:0%">0%</div>
+          </div>
+          <div class="status-text starting" data-status="habits">⏳ شروع</div>
+        </div>
+        <div class="notes-section">
+          <button class="note-btn">📝 افزودن یادداشت</button>
+          <div class="note-editor">
+            <textarea class="note-textarea" placeholder="یادداشت خود را بنویسید..."></textarea>
+            <div class="note-actions">
+              <button class="save" onclick="saveNote(this)">ذخیره</button>
+              <button class="cancel" onclick="cancelNote(this)">لغو</button>
+            </div>
+          </div>
+          <div class="note-preview" data-note="habits"></div>
+        </div>
+      </section>
+
+      <!-- تابلوی امتیاز -->
+      <section class="card" data-card="scoreboard">
+        <div class="section-title"><h2><span class="checkmark">✓</span>🏁 تابلوی امتیاز</h2><small class="soft">پیشرفت هفتگی</small></div>
+        <div id="scoreboard" class="editable" contenteditable="true">
+          <ul class="list">
+            <li class="kpi"><span>Leads این هفته</span> <small>هدف ۲۰+</small></li>
+            <li class="kpi"><span>Conversion تماس→پیشنهاد</span> <small>≥ ۳۰٪</small></li>
+            <li class="kpi"><span>On-Time Delivery</span> <small>≥ ۸۵٪</small></li>
+            <li class="kpi"><span>محتوای منتشرشده</span> <small>۲+</small></li>
+          </ul>
+        </div>
+        <div class="progress-section">
+          <div class="progress-control">
+            <input type="number" min="0" max="100" class="score-input" placeholder="0-100" data-card="scoreboard" />
+            <span class="progress-label">امتیاز پیشرفت:</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" data-bar="scoreboard" style="width:0%">0%</div>
+          </div>
+          <div class="status-text starting" data-status="scoreboard">⏳ شروع</div>
+        </div>
+        <div class="notes-section">
+          <button class="note-btn">📝 افزودن یادداشت</button>
+          <div class="note-editor">
+            <textarea class="note-textarea" placeholder="یادداشت خود را بنویسید..."></textarea>
+            <div class="note-actions">
+              <button class="save" onclick="saveNote(this)">ذخیره</button>
+              <button class="cancel" onclick="cancelNote(this)">لغو</button>
+            </div>
+          </div>
+          <div class="note-preview" data-note="scoreboard"></div>
+        </div>
+      </section>
+
+      <!-- ریچوال بازبینی -->
+      <section class="card" data-card="rituals">
+        <div class="section-title"><h2><span class="checkmark">✓</span>🔁 ریچوال بازبینی</h2><small class="soft">روزانه / هفتگی / ماهانه</small></div>
+        <div id="rituals" class="editable" contenteditable="true">
+          <ul class="list">
+            <li><b>روزانه:</b> برنامه ۳ کار مهم، مرور عصرگاهی ۱۰ دقیقه.</li>
+            <li><b>هفتگی:</b> مرور اسکوربورد + تعیین ۵ تمرکز جدید.</li>
+            <li><b>ماهانه:</b> مرور مایلستون‌ها + به‌روزرسانی اهداف SMART.</li>
+          </ul>
+        </div>
+        <div class="progress-section">
+          <div class="progress-control">
+            <input type="number" min="0" max="100" class="score-input" placeholder="0-100" data-card="rituals" />
+            <span class="progress-label">امتیاز پیشرفت:</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" data-bar="rituals" style="width:0%">0%</div>
+          </div>
+          <div class="status-text starting" data-status="rituals">⏳ شروع</div>
+        </div>
+        <div class="notes-section">
+          <button class="note-btn">📝 افزودن یادداشت</button>
+          <div class="note-editor">
+            <textarea class="note-textarea" placeholder="یادداشت خود را بنویسید..."></textarea>
+            <div class="note-actions">
+              <button class="save" onclick="saveNote(this)">ذخیره</button>
+              <button class="cancel" onclick="cancelNote(this)">لغو</button>
+            </div>
+          </div>
+          <div class="note-preview" data-note="rituals"></div>
+        </div>
+      </section>
+
+      <!-- جمله الهام‌بخش -->
+      <section class="card" data-card="motto">
+        <div class="section-title"><h2><span class="checkmark">✓</span>💬 جملهٔ الهام‌بخش</h2><small class="soft">Personal Motto</small></div>
+        <div id="motto" class="editable" contenteditable="true">ساده، سریع، شفاف — هر روز ۱٪ بهتر.</div>
+        <div class="progress-section">
+          <div class="progress-control">
+            <input type="number" min="0" max="100" class="score-input" placeholder="0-100" data-card="motto" />
+            <span class="progress-label">امتیاز پیشرفت:</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" data-bar="motto" style="width:0%">0%</div>
+          </div>
+          <div class="status-text starting" data-status="motto">⏳ شروع</div>
+        </div>
+        <div class="notes-section">
+          <button class="note-btn">📝 افزودن یادداشت</button>
+          <div class="note-editor">
+            <textarea class="note-textarea" placeholder="یادداشت خود را بنویسید..."></textarea>
+            <div class="note-actions">
+              <button class="save" onclick="saveNote(this)">ذخیره</button>
+              <button class="cancel" onclick="cancelNote(this)">لغو</button>
+            </div>
+          </div>
+          <div class="note-preview" data-note="motto"></div>
+        </div>
+      </section>
+    </div>
+
+    <div class="chart-section">
+      <h2 style="margin:0 0 12px">📈 ردیاب رشد (Growth Tracker)</h2>
+      <div class="hint">میانگین پیشرفت همه کارت‌ها در طول زمان</div>
+      <div class="chart-wrapper">
+        <canvas id="growthChart"></canvas>
+      </div>
+    </div>
+
+    <div class="chart-section" style="margin-top: 25px;">
+      <h2 style="margin:0 0 12px">📊 نمودار مقایسه پیشرفت (Progress Comparison)</h2>
+      <div class="hint">مقایسه پیشرفت هر کارت به صورت میله‌ای</div>
+      <div class="chart-wrapper">
+        <canvas id="barChart"></canvas>
+      </div>
+    </div>
+
+    <footer>ساخته‌شده با ❤ توسط حمیدرضا برزین — Toronto, Canada · نسخهٔ تعاملی با ابزار پیشرفته</footer>
+  </div>
+
+  <script>
+    // Storage keys
+    const STORAGE_KEY = 'barzin-roadmap-v2';
+    const CHART_KEY = 'barzin-chart-data';
+    const editableEls = Array.from(document.querySelectorAll('.editable'));
+    
+    // State
+    let chartData = { labels: [], data: [] };
+    let chart = null;
+    let barChart = null;
+    
+    // Motivational messages
+    const motivationalMsgs = [
+      'ادامه بده، CEO برزین! 💪',
+      'شما در مسیر درست هستید! ⭐',
+      'هر روز 1% بهتر! 🚀',
+      'نیروی طلایی درون شما! ✨',
+      'عبور از مرزها امکان‌پذیر است! 🌟'
+    ];
+    
+    // Load saved data
+    function loadData() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+        if (saved) {
+          editableEls.forEach(el => {
+            if (saved[el.id] !== undefined) el.innerHTML = saved[el.id];
+          });
+        }
+      } catch (e) { }
+      
+      // Load scores
+      document.querySelectorAll('.score-input').forEach(input => {
+        const cardId = input.dataset.card;
+        const saved = localStorage.getItem(`score_${cardId}`);
+        if (saved) {
+          input.value = saved;
+          updateProgress(input);
+        }
+      });
+      
+      // Load notes
+      document.querySelectorAll('[data-note]').forEach(el => {
+        const note = localStorage.getItem(`note_${el.dataset.note}`);
+        if (note) {
+          el.textContent = note;
+          el.style.display = note ? 'block' : 'none';
+        }
+      });
+      
+      // Load chart data
+      const chartSaved = localStorage.getItem(CHART_KEY);
+      if (chartSaved) chartData = JSON.parse(chartSaved);
+      if (chartData.labels.length > 0) {
+        initChart();
+      }
+      
+      initBarChart();
+      checkAllAchievements();
+    }
+    
+    // Save data
+    function saveData() {
+      const data = {};
+      editableEls.forEach(el => data[el.id] = el.innerHTML.trim());
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      
+      // Save scores
+      document.querySelectorAll('.score-input').forEach(input => {
+        const cardId = input.dataset.card;
+        localStorage.setItem(`score_${cardId}`, input.value);
+      });
+      
+      // Save notes
+      document.querySelectorAll('[data-note]').forEach(el => {
+        if (el.textContent.trim()) {
+          localStorage.setItem(`note_${el.dataset.note}`, el.textContent.trim());
+        }
+      });
+      
+      toast('ذخیره شد ✅');
+    }
+    
+    // Update progress bar
+    function updateProgress(input) {
+      const score = parseInt(input.value) || 0;
+      const cardId = input.dataset.card;
+      const bar = document.querySelector(`[data-bar="${cardId}"]`);
+      const status = document.querySelector(`[data-status="${cardId}"]`);
+      const card = input.closest('.card');
+      
+      bar.style.width = score + '%';
+      bar.textContent = score + '%';
+      
+      // Update status
+      let statusClass = 'starting', statusText = '⏳ شروع';
+      if (score >= 80) {
+        statusClass = 'completed';
+        statusText = '✅ تکمیل شد';
+        card.classList.add('achieved');
+      } else if (score >= 40) {
+        statusClass = 'progress';
+        statusText = '⚙️ در حال انجام';
+        card.classList.remove('achieved');
+      } else {
+        statusClass = 'starting';
+        statusText = '⏳ شروع';
+        card.classList.remove('achieved');
+      }
+      
+      status.className = `status-text ${statusClass}`;
+      status.textContent = statusText;
+      
+      checkAllAchievements();
+      saveToChart();
+      initBarChart();
+    }
+    
+    // Check achievements
+    function checkAllAchievements() {
+      const scores = Array.from(document.querySelectorAll('.score-input')).map(i => parseInt(i.value) || 0);
+      const allAchieved = scores.filter(s => s >= 75).length === scores.length && scores.length > 0;
+      document.getElementById('milestoneBanner').classList.toggle('active', allAchieved);
+    }
+    
+    // Add note
+    document.querySelectorAll('.note-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const editor = this.nextElementSibling;
+        if (editor) editor.classList.add('active');
+        this.style.display = 'none';
+      });
+    });
+    
+    function saveNote(btn) {
+      const editor = btn.closest('.note-editor');
+      const textarea = editor.querySelector('.note-textarea');
+      const preview = editor.parentElement.querySelector('.note-preview');
+      const cardId = editor.closest('.card').dataset.card;
+      
+      preview.textContent = textarea.value;
+      preview.style.display = textarea.value ? 'block' : 'none';
+      localStorage.setItem(`note_${cardId}`, textarea.value);
+      
+      editor.classList.remove('active');
+      editor.parentElement.querySelector('.note-btn').style.display = 'block';
+      editor.querySelector('.note-textarea').value = '';
+      
+      toast('یادداشت ذخیره شد 📝');
+    }
+    
+    function cancelNote(btn) {
+      const editor = btn.closest('.note-editor');
+      editor.classList.remove('active');
+      editor.parentElement.querySelector('.note-btn').style.display = 'block';
+      editor.querySelector('.note-textarea').value = '';
+    }
+    
+    // Score input listeners
+    document.querySelectorAll('.score-input').forEach(input => {
+      input.addEventListener('input', function() {
+        updateProgress(this);
+      });
+      
+      // Tooltip
+      const randMsg = motivationalMsgs[Math.floor(Math.random() * motivationalMsgs.length)];
+      input.setAttribute('data-tip', randMsg);
+      input.classList.add('tooltip');
+    });
+    
+    // Save to chart
+    function saveToChart() {
+      const scores = Array.from(document.querySelectorAll('.score-input')).map(i => parseInt(i.value) || 0);
+      const avg = scores.length > 0 ? Math.round(scores.reduce((a,b) => a+b, 0) / scores.length) : 0;
+      const now = new Date().toLocaleString('fa-IR', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+      
+      chartData.labels.push(now);
+      chartData.data.push(avg);
+      
+      // Keep last 20 points
+      if (chartData.labels.length > 20) {
+        chartData.labels.shift();
+        chartData.data.shift();
+      }
+      
+      localStorage.setItem(CHART_KEY, JSON.stringify(chartData));
+      initChart();
+    }
+    
+    // Initialize Chart.js
+    function initChart() {
+      const ctx = document.getElementById('growthChart');
+      if (!ctx) return;
+      
+      if (chart) chart.destroy();
+      
+      chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: chartData.labels,
+          datasets: [{
+            label: 'میانگین پیشرفت',
+            data: chartData.data,
+            borderColor: '#d4af37',
+            backgroundColor: 'rgba(212, 175, 55, 0.1)',
+            borderWidth: 3,
+            tension: 0.4,
+            fill: true,
+            pointRadius: 5,
+            pointHoverRadius: 8,
+            pointBackgroundColor: '#d4af37',
+            pointBorderColor: '#111',
+            pointBorderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 100,
+              grid: { color: 'rgba(229, 196, 94, 0.1)' },
+              ticks: { color: '#b9b9c6', font: { family: 'Vazirmatn' } }
+            },
+            x: {
+              grid: { display: false },
+              ticks: { color: '#b9b9c6', font: { family: 'Vazirmatn', size: 11 }, maxRotation: 45, minRotation: 45 }
+            }
+          }
+        }
+      });
+    }
+    
+    // Initialize Bar Chart
+    function initBarChart() {
+      const ctx = document.getElementById('barChart');
+      if (!ctx) return;
+      
+      if (barChart) barChart.destroy();
+      
+      // Get card data
+      const cards = document.querySelectorAll('.card');
+      const labels = [];
+      const data = [];
+      
+      cards.forEach(card => {
+        const cardId = card.dataset.card;
+        if (cardId) {
+          const title = card.querySelector('h2').textContent.trim().replace(/\d+\.\s*/, '');
+          labels.push(title);
+          
+          const scoreInput = card.querySelector('.score-input');
+          const score = scoreInput ? parseInt(scoreInput.value) || 0 : 0;
+          data.push(score);
+        }
+      });
+      
+      barChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'پیشرفت (%)',
+            data: data,
+            backgroundColor: 'rgba(212, 175, 55, 0.6)',
+            borderColor: '#d4af37',
+            borderWidth: 2,
+            borderRadius: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 100,
+              grid: { color: 'rgba(229, 196, 94, 0.1)' },
+              ticks: { color: '#b9b9c6', font: { family: 'Vazirmatn' } }
+            },
+            x: {
+              grid: { display: false },
+              ticks: { color: '#b9b9c6', font: { family: 'Vazirmatn', size: 10 } }
+            }
+          }
+        }
+      });
+    }
+    
+    // Focus mode
+    document.getElementById('focusMode').addEventListener('click', function() {
+      const isActive = document.body.classList.toggle('focus-mode');
+      this.textContent = isActive ? 'خروج از حالت تمرکز' : 'حالت تمرکز';
+    });
+    
+    // Clear data
+    document.getElementById('clearData').addEventListener('click', function() {
+      if (confirm('پاک کردن تمام داده‌ها؟ این عمل قابل بازگشت نیست.')) {
+        localStorage.clear();
+        location.reload();
+      }
+    });
+    
+    // Export JSON
+    document.getElementById('export').addEventListener('click', function() {
+      const data = {};
+      editableEls.forEach(el => data[el.id] = el.innerText.trim());
+      
+      const scores = {};
+      document.querySelectorAll('.score-input').forEach(input => {
+        scores[input.dataset.card] = input.value;
+      });
+      data.scores = scores;
+      
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'barzin-roadmap.json';
+      a.click();
+    });
+    
+    // Toggle edit
+    document.getElementById('toggleEdit').addEventListener('click', function() {
+      const editOn = editableEls[0].getAttribute('contenteditable') === 'true';
+      editableEls.forEach(el => el.setAttribute('contenteditable', !editOn));
+      this.textContent = editOn ? 'حالت ویرایش' : 'قفل کردن';
+      toast(editOn ? 'قفل شد 🔒' : 'ویرایش فعال شد ✏️');
+    });
+    
+    // Print
+    document.getElementById('save').addEventListener('click', saveData);
+    
+    // Toast
+    function toast(msg) {
+      const t = document.createElement('div');
+      t.textContent = msg;
+      Object.assign(t.style, {
+        position: 'fixed', bottom: '16px', right: '16px',
+        background: 'rgba(20, 20, 26, .95)', color: 'var(--text)',
+        border: '1px solid rgba(229, 196, 94, .35)', padding: '12px 16px',
+        borderRadius: '12px', boxShadow: '0 8px 20px rgba(0,0,0,.35)',
+        zIndex: 9999, fontFamily: 'Vazirmatn'
+      });
+      document.body.appendChild(t);
+      setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'opacity .4s'; }, 1600);
+      setTimeout(() => t.remove(), 2200);
+    }
+    
+    // Initialize
+    loadData();
+  </script>
+</body>
+</html>

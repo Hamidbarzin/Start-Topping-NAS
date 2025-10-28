@@ -1,0 +1,237 @@
+/* Topping Empire AI Logistics - Main Stylesheet */
+:root {
+  --bg: #0b0b0f;
+  --panel: #121219;
+  --soft: #1a1a24;
+  --text: #e9e9ee;
+  --muted: #b9b9c6;
+  --gold: #d4af37;
+  --gold-2: #e5c45e;
+  --ok: #19c37d;
+  --warn: #ffb020;
+  --bad: #ff5c5c;
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --sidebar-width: 280px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Vazirmatn', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(18,18,25,.98), rgba(11,11,15,.98));
+  border-left: 1px solid rgba(229,196,94,.15);
+  padding: 24px 20px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: -10px 0 30px rgba(0,0,0,.5);
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(229,196,94,.1);
+  margin-bottom: 24px;
+}
+
+.sidebar-logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8em;
+  box-shadow: 0 4px 15px rgba(212,175,55,.3);
+}
+
+.sidebar-title {
+  flex: 1;
+  font-weight: 800;
+  font-size: 1.1em;
+  color: var(--gold);
+}
+
+.sidebar-nav {
+  list-style: none;
+  padding: 0;
+}
+
+.nav-item {
+  margin-bottom: 8px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  color: var(--muted);
+  text-decoration: none;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  font-size: 0.95em;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  background: rgba(229,196,94,.08);
+  color: var(--gold);
+  transform: translateX(-4px);
+}
+
+.nav-link.active {
+  background: linear-gradient(90deg, rgba(212,175,55,.15), transparent);
+  color: var(--gold);
+  border-right: 3px solid var(--gold);
+}
+
+.nav-icon {
+  font-size: 1.3em;
+  width: 24px;
+  text-align: center;
+}
+
+/* Main Content */
+.main-content {
+  margin-right: var(--sidebar-width);
+  min-height: 100vh;
+  background:
+    radial-gradient(1100px 600px at 120% -10%, rgba(212,175,55,.15), transparent 60%),
+    radial-gradient(1000px 500px at -20% 120%, rgba(229,196,94,.12), transparent 60%),
+    var(--bg);
+}
+
+.content-wrapper {
+  padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 50px;
+  animation: fadeInDown 0.8s ease;
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-2));
+  box-shadow: 0 8px 32px rgba(212,175,55,.4);
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+}
+
+h1 {
+  font-size: 2.5em;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--gold), var(--gold-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Home Button */
+.home-button {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-2));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8em;
+  box-shadow: 0 8px 24px rgba(212,175,55,.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 999;
+  text-decoration: none;
+}
+
+.home-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 32px rgba(212,175,55,.6);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    margin-right: 0;
+  }
+
+  .content-wrapper {
+    padding: 20px 15px;
+  }
+
+  .home-button {
+    bottom: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5em;
+  }
+}
+

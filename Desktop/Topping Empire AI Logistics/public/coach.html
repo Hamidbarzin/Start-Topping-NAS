@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مربی کسب‌وکار - Topping Empire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <style>
+        :root {
+            --bg: #1a1a21;
+            --card-bg: #1e1e28;
+            --gold: #d4af37;
+            --gold-hover: #e5c45e;
+            --text: #e9e9ee;
+            --muted: #999;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #1a1a21 0%, #0a0a0f 100%);
+            color: var(--text);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3em;
+            color: var(--gold);
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--muted);
+            margin-bottom: 40px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            border-color: var(--gold);
+        }
+
+        .stat-card h3 {
+            font-size: 2.5em;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            color: var(--muted);
+        }
+
+        .progress-section {
+            background: var(--card-bg);
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .progress-bar-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            height: 30px;
+            overflow: hidden;
+            margin-top: 15px;
+            position: relative;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, var(--gold), var(--gold-hover));
+            height: 100%;
+            transition: width 0.5s;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: 700;
+            color: #111;
+        }
+
+        .tasks-section {
+            background: var(--card-bg);
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .add-task-btn {
+            background: linear-gradient(135deg, var(--gold), var(--gold-hover));
+            color: #111;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-family: 'Vazirmatn', sans-serif;
+            font-weight: 700;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .add-task-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .task-form {
+            display: none;
+            background: rgba(212, 175, 55, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .task-form.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--text);
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        .task-list {
+            list-style: none;
+        }
+
+        .task-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .task-item:hover {
+            background: rgba(212, 175, 55, 0.1);
+            border-color: var(--gold);
+        }
+
+        .task-info h4 {
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+
+        .task-info p {
+            color: var(--muted);
+            font-size: 0.9em;
+        }
+
+        .priority-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .priority-high {
+            background: rgba(255, 59, 48, 0.2);
+            color: #ff3b30;
+        }
+
+        .priority-medium {
+            background: rgba(255, 204, 0, 0.2);
+            color: #ffcc00;
+        }
+
+        .priority-low {
+            background: rgba(52, 199, 89, 0.2);
+            color: #34c759;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Vazirmatn', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-complete {
+            background: rgba(52, 199, 89, 0.2);
+            color: #34c759;
+            border: 1px solid #34c759;
+        }
+
+        .btn-complete:hover {
+            background: #34c759;
+            color: white;
+        }
+
+        .btn-delete {
+            background: rgba(255, 59, 48, 0.2);
+            color: #ff3b30;
+            border: 1px solid #ff3b30;
+        }
+
+        .btn-delete:hover {
+            background: #ff3b30;
+            color: white;
+        }
+
+        .task-item.completed {
+            opacity: 0.5;
+            text-decoration: line-through;
+        }
+
+        .ai-coach {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .ai-coach h2 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ai-feedback {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border-right: 4px solid var(--gold);
+        }
+
+        .ai-suggestions {
+            margin-top: 15px;
+        }
+
+        .ai-suggestions ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .ai-suggestions li {
+            padding: 10px;
+            margin: 5px 0;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 8px;
+            border-right: 3px solid var(--gold);
+        }
+
+        .chart-section {
+            background: var(--card-bg);
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-top: 20px;
+        }
+
+        .home-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-hover));
+            color: #111;
+            padding: 15px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+        }
+
+        /* Toast Notifications */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -100%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+            to {
+                opacity: 0;
+                transform: translate(-50%, -100%);
+            }
+        }
+        
+        /* Button hover effects */
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .btn:active {
+            transform: scale(0.95);
+        }
+        
+        /* Progress bar animation */
+        .progress-bar {
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>�‍💼 مربی کسب‌وکار هوش مصنوعی 🤖</h1>
+        <p class="subtitle">چک‌لیست هوشمند، اندازه‌گیری و تحلیل پیشرفت</p>
+        
+       
+        <!-- آمار کلی -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3 id="totalScore">0</h3>
+                <p>📊 امتیاز کل</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="completedTasks">0</h3>
+                <p>✅ کارهای انجام شده</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="pendingTasks">0</h3>
+                <p>⏳ کارهای در انتظار</p>
+            </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-section">
+            <h2>📈 پیشرفت کلی ماه</h2>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar" style="width: 0%">
+                    <span class="progress-text" id="progressText">0%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- چک‌لیست کارها -->
+        <div class="tasks-section">
+            <h2>📋 چک‌لیست ماهانه</h2>
+            <button class="add-task-btn" onclick="toggleTaskForm()">➕ افزودن کار جدید</button>
+
+            <div class="task-form" id="taskForm">
+                <div class="form-group">
+                    <label>عنوان کار:</label>
+                    <input type="text" id="taskTitle" placeholder="مثال: ثبت شرکت در استونی">
+                </div>
+                <div class="form-group">
+                    <label>توضیحات:</label>
+                    <textarea id="taskDesc" rows="3" placeholder="جزئیات کار..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>اولویت:</label>
+                    <select id="taskPriority">
+                        <option value="low">کم (امتیاز: 5)</option>
+                        <option value="medium">متوسط (امتیاز: 10)</option>
+                        <option value="high">بالا (امتیاز: 20)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>دولاین:</label>
+                    <input type="date" id="taskDeadline">
+                </div>
+                <div class="task-actions">
+                    <button class="btn" style="background: var(--gold); color: #111;" onclick="addTask()">💾 ذخیره</button>
+                    <button class="btn" style="background: #666; color: white;" onclick="toggleTaskForm()">❌ لغو</button>
+                </div>
+            </div>
+
+            <ul class="task-list" id="taskList"></ul>
+        </div>
+
+        <!-- مربی AI -->
+        <div class="ai-coach">
+            <h2>🤖 تحلیل و پیشنهاد هوش مصنوعی</h2>
+            <button class="btn" style="background: var(--gold); color: #111; margin-bottom: 15px;" onclick="requestAICoach()">
+                🔮 دریافت مشاوره با xAI
+            </button>
+            <div class="ai-feedback">
+                <p id="aiFeedback">وضعیت فعلی خود را بررسی کنید...</p>
+                <div class="ai-suggestions" id="aiSuggestions"></div>
+            </div>
+        </div>
+
+        <!-- نمودارها -->
+        <div class="chart-section">
+            <h2>📊 نمودار پیشرفت</h2>
+            <canvas id="progressChart"></canvas>
+        </div>
+    </div>
+
+    <a href="/" class="home-btn">🏠 خانه</a>
+
+    <!-- Load Chart.js before our script -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <script>
+        // Storage Key
+        const STORAGE_KEY = 'business-coach-tasks';
+        let tasks = [];
+        let chart = null;
+        
+        // Toast notification function
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: ${type === 'success' ? '#19c37d' : '#ff5c5c'};
+                color: white;
+                padding: 15px 30px;
+                border-radius: 10px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+                z-index: 10000;
+                animation: slideDown 0.3s ease-out;
+                font-weight: 600;
+                font-family: 'Vazirmatn', sans-serif;
+            `;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.animation = 'slideUp 0.3s ease-out';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Request AI Coach
+        async function requestAICoach() {
+            const btn = document.getElementById('aiCoachBtn');
+            if (!btn) return;
+            
+            btn.disabled = true;
+            btn.textContent = '⏳ در حال تحلیل...';
+            
+            try {
+                // Simulate AI processing
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                await updateAI();
+                showToast('✅ مشاوره هوش مصنوعی دریافت شد!', 'success');
+            } catch (error) {
+                console.error('AI coach error:', error);
+                showToast('❌ خطا در دریافت مشاوره', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '🔮 دریافت مشاوره با AI';
+            }
+        }
+
+        // Initialize
+        function init() {
+            loadTasks();
+            renderTasks();
+            updateStats();
+            updateAI();
+            initChart();
+        }
+
+        // Load tasks from localStorage
+        function loadTasks() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                tasks = JSON.parse(saved || '[]');
+            }
+        }
+
+        // Save tasks
+        function saveTasks() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+            updateStats();
+            updateAI();
+        }
+
+        // Toggle form
+        function toggleTaskForm() {
+            const form = document.getElementById('taskForm');
+            form.classList.toggle('active');
+        }
+
+        // Add task
+        function addTask() {
+            const title = document.getElementById('taskTitle').value.trim();
+            const desc = document.getElementById('taskDesc').value.trim();
+            const priority = document.getElementById('taskPriority').value;
+            const deadline = document.getElementById('taskDeadline').value;
+
+            if (!title) {
+                showToast('⚠️ لطفاً عنوان کار را وارد کنید', 'error');
+                return;
+            }
+
+            const newTask = {
+                id: Date.now(),
+                title,
+                description: desc,
+                priority,
+                deadline,
+                completed: false,
+                reason: ''
+            };
+
+            tasks.push(newTask);
+            saveTasks();
+            renderTasks();
+            showToast('✅ کار جدید اضافه شد', 'success');
+
+            // Clear form
+            document.getElementById('taskTitle').value = '';
+            document.getElementById('taskDesc').value = '';
+            document.getElementById('taskDeadline').value = '';
+            toggleTaskForm();
+        }
+
+        // Render tasks
+        function renderTasks() {
+            const list = document.getElementById('taskList');
+            list.innerHTML = '';
+
+            tasks.forEach(task => {
+                const li = document.createElement('li');
+                li.className = `task-item ${task.completed ? 'completed' : ''}`;
+
+                const points = {
+                    low: 5,
+                    medium: 10,
+                    high: 20
+                };
+
+                li.innerHTML = `
+                    <div class="task-info">
+                        <h4>${task.title} <span class="priority-badge priority-${task.priority}">${task.priority === 'high' ? 'بالا' : task.priority === 'medium' ? 'متوسط' : 'کم'}</span></h4>
+                        <p>${task.description}</p>
+                        <p style="font-size: 0.85em; color: #999;">🎯 امتیاز: ${points[task.priority]} | 📅 ${new Date(task.deadline).toLocaleDateString('fa-IR')}</p>
+                    </div>
+                    <div class="task-actions">
+                        ${!task.completed ? `
+                            <button class="btn btn-complete" onclick="completeTask(${task.id})">✅ انجام شد</button>
+                            <button class="btn" style="background: rgba(255, 149, 0, 0.2); color: #ff9500; border: 1px solid #ff9500;" onclick="skipTask(${task.id})">⏭️ رد شد</button>
+                        ` : ''}
+                        <button class="btn btn-delete" onclick="deleteTask(${task.id})">🗑️ حذف</button>
+                    </div>
+                `;
+                list.appendChild(li);
+            });
+        }
+
+        // Complete task
+        function completeTask(id) {
+            const task = tasks.find(t => t.id === id);
+            if (task) {
+                task.completed = true;
+                saveTasks();
+                renderTasks();
+                initChart();
+                showToast('✅ کار انجام شد!', 'success');
+            }
+        }
+
+        // Skip task (با دلیل)
+        function skipTask(id) {
+            const reason = prompt('چرا این کار انجام نشد؟\n\nمثال:\n- کمبود وقت\n- کمبود منابع\n- عدم اولویت\n- مشکل تکنیکال');
+            
+            if (reason) {
+                const task = tasks.find(t => t.id === id);
+                if (task) {
+                    task.reason = reason;
+                    task.completed = false;
+                    saveTasks();
+                    updateAI();
+                }
+            }
+        }
+
+        // Delete task
+        function deleteTask(id) {
+            if (confirm('آیا مطمئنید که می‌خواهید این کار را حذف کنید؟')) {
+                tasks = tasks.filter(t => t.id !== id);
+                saveTasks();
+                renderTasks();
+                showToast('🗑️ کار حذف شد', 'success');
+            }
+        }
+
+        // Update stats
+        function updateStats() {
+            const points = { low: 5, medium: 10, high: 20 };
+            let totalScore = 0;
+            let completed = 0;
+
+            tasks.forEach(task => {
+                if (task.completed) {
+                    totalScore += points[task.priority];
+                    completed++;
+                }
+            });
+
+            document.getElementById('totalScore').textContent = totalScore;
+            document.getElementById('completedTasks').textContent = completed;
+            document.getElementById('pendingTasks').textContent = tasks.length - completed;
+
+            // Update progress
+            const progress = tasks.length > 0 ? Math.round((completed / tasks.length) * 100) : 0;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressText').textContent = progress + '%';
+        }
+
+        // AI Analysis
+        async function updateAI() {
+            const points = { low: 5, medium: 10, high: 20 };
+            const completed = tasks.filter(t => t.completed).length;
+            const total = tasks.length;
+            const progress = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+            let feedback = '';
+            let suggestions = [];
+
+            // تحلیل کلی
+            if (progress >= 80) {
+                feedback = '🎉 عالی! عملکرد بالایی داری. به تلاشت ادامه بده!';
+                suggestions.push('✅ کارهای با اولویت بالا را اول انجام بده');
+            } else if (progress >= 50) {
+                feedback = '👍 خوب پیش می‌رودی. یکم بیشتر تلاش کن!';
+                suggestions.push('⚡ روی کارهای معوقه تمرکز کن');
+                suggestions.push('📅 ددلاین‌ها را بررسی کن');
+            } else if (progress >= 30) {
+                feedback = '⚠️ نیاز به تلاش بیشتر داری. باید روی کارها تمرکز کنی!';
+                suggestions.push('🎯 اولویت‌ها را بازبینی کن');
+                suggestions.push('⏰ زمان‌بندی دقیق‌تری بده');
+            } else {
+                feedback = '🔴 عملکرد پایینی داری. باید جدی‌تر بشی!';
+                suggestions.push('📋 لیست کارها را ساده‌تر کن');
+                suggestions.push('🎯 روی 3 کار مهم متمرکز شو');
+            }
+
+            // تحلیل دلایل
+            const reasons = tasks.filter(t => !t.completed && t.reason);
+            reasons.forEach(task => {
+                const reason = task.reason.toLowerCase();
+                
+                if (reason.includes('وقت') || reason.includes('زمان')) {
+                    suggestions.push('💡 پیشنهاد: از تکنیک Pomodoro استفاده کن (25 دقیقه کار، 5 دقیقه استراحت)');
+                } else if (reason.includes('منابع') || reason.includes('پول')) {
+                    suggestions.push('💰 پیشنهاد: بودجه‌بندی دقیق‌تری بساز یا با شریک تجاری صحبت کن');
+                } else if (reason.includes('انگیزه') || reason.includes('حوصله')) {
+                    suggestions.push('🚀 پیشنهاد: اهداف کوچک روزانه بذار و بعد از تکمیل به خودت پاداش بده');
+                } else if (reason.includes('اولویت') || reason.includes('ضرورت')) {
+                    suggestions.push('🎯 پیشنهاد: کارها را با ماتریس Eisenhower اولویت‌بندی کن');
+                }
+            });
+
+            // Advanced AI Analysis with xAI API
+            const incompleteTasks = tasks.filter(t => !t.completed && t.reason);
+            if (incompleteTasks.length > 0) {
+                try {
+                    const aiAdvice = await getAIAdvice(incompleteTasks);
+                    if (aiAdvice && aiAdvice.length > 0) {
+                        suggestions.push(...aiAdvice);
+                    }
+                } catch (error) {
+                    console.log('AI API error, using basic suggestions');
+                }
+            }
+
+            // جلوگیری از تکرار
+            suggestions = [...new Set(suggestions)];
+
+            document.getElementById('aiFeedback').textContent = feedback;
+            
+            const suggestionsEl = document.getElementById('aiSuggestions');
+            suggestionsEl.innerHTML = '';
+            
+            if (suggestions.length > 0) {
+                const ul = document.createElement('ul');
+                suggestions.forEach(suggestion => {
+                    const li = document.createElement('li');
+                    li.textContent = suggestion;
+                    ul.appendChild(li);
+                });
+                suggestionsEl.appendChild(ul);
+            }
+        }
+
+        // xAI API Integration - با مدیریت خطای کامل
+        async function getAIAdvice(incompleteTasks) {
+            const API_KEY = 'YOUR_XAI_API_KEY_HERE'; // Replace with your actual API key
+            
+            // ساختاردهی به کارهای ناتمام
+            const context = incompleteTasks.map(t => 
+                `- کار: "${t.title}" | اولویت: ${t.priority} | دلیل ناتمامی: ${t.reason}`
+            ).join('\n');
+
+            const prompt = `به عنوان مربی کسب‌وکار حرفه‌ای، کاربر این کارها را ناتمام گذاشته:\n\n${context}\n\nبرای هر کار یک پیشنهاد عملی و اجرایی بده (حداکثر یک خط). خروجی را به صورت لیست خطی ارائه کن.`;
+
+            try {
+                console.log('🔄 در حال اتصال به xAI API...');
+                
+                const response = await fetch('https://api.x.ai/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${API_KEY}`
+                    },
+                    body: JSON.stringify({
+                        model: 'grok-beta',
+                        messages: [
+                            { 
+                                role: 'system', 
+                                content: 'شما یک مربی کسب‌وکار حرفه‌ای هستید که پیشنهادات عملی و اجرایی به زبان فارسی می‌دهید. همیشه پاسخ‌های کوتاه و مفید بدهید.' 
+                            },
+                            { 
+                                role: 'user', 
+                                content: prompt 
+                            }
+                        ],
+                        max_tokens: 500,
+                        temperature: 0.7,
+                        stream: false
+                    })
+                });
+
+                console.log('📡 وضعیت پاسخ:', response.status, response.statusText);
+
+                // بررسی خطاهای مختلف
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    console.error('❌ خطای API:', errorData);
+                    
+                    if (response.status === 401) {
+                        alert('⚠️ کلید API معتبر نیست. لطفاً کلید را در console.x.ai بررسی کنید.');
+                        return null;
+                    } else if (response.status === 429) {
+                        alert('⏱️ تعداد درخواست‌ها زیاد شده. لطفاً کمی صبر کنید.');
+                        return null;
+                    } else if (response.status === 404) {
+                        alert('🔍 مدل یافت نشد. لطفاً از مدل در دسترس استفاده کنید.');
+                        return null;
+                    } else {
+                        alert(`❌ خطای ${response.status}: ${errorData.error?.message || 'خطای نامشخص'}`);
+                        return null;
+                    }
+                }
+
+                const data = await response.json();
+                console.log('✅ پاسخ دریافت شد:', data);
+
+                if (data.choices && data.choices.length > 0) {
+                    const aiSuggestion = data.choices[0].message.content;
+                    const suggestions = aiSuggestion.split('\n')
+                        .filter(s => s.trim() && s.length > 10)
+                        .map(s => s.trim().replace(/^[-\d.]+\s*/, '')); // حذف شماره‌گذاری
+                    
+                    return suggestions;
+                }
+            } catch (error) {
+                console.error('❌ خطا در ارتباط با API:', error);
+                alert('⚠️ خطا در اتصال به سرور xAI. از پیشنهادات محلی استفاده می‌شود.');
+            }
+
+            return null;
+        }
+
+        // Initialize Chart
+        function initChart() {
+            const ctx = document.getElementById('progressChart');
+            if (!ctx) return;
+
+            const points = { low: 5, medium: 10, high: 20 };
+            const dates = [...new Set(tasks.map(t => new Date(t.deadline).toLocaleDateString('fa-IR')))];
+            const data = dates.map(date => {
+                return tasks
+                    .filter(t => new Date(t.deadline).toLocaleDateString('fa-IR') === date && t.completed)
+                    .reduce((sum, t) => sum + points[t.priority], 0);
+            });
+
+            if (chart) chart.destroy();
+
+            chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'امتیاز تکمیل‌شده',
+                        data: data,
+                        backgroundColor: 'rgba(212, 175, 55, 0.6)',
+                        borderColor: '#d4af37',
+                        borderWidth: 2,
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(212, 175, 55, 0.1)'
+                            },
+                            ticks: {
+                                color: '#999'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#999',
+                                maxRotation: 45
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        console.log('🚀 Script loaded!');
+        
+        // Initialize immediately
+        init();
+        console.log('✅ init() completed');
+        
+        // Setup event listeners immediately
+        setTimeout(function() {
+            console.log('🔧 Setting up event listeners...');
+            
+            const addTaskBtn = document.getElementById('addTaskBtn');
+            const saveTaskBtn = document.getElementById('saveTaskBtn');
+            const cancelTaskBtn = document.getElementById('cancelTaskBtn');
+            const aiCoachBtn = document.getElementById('aiCoachBtn');
+            const taskList = document.getElementById('taskList');
+            
+            console.log('Elements:', {
+                addTaskBtn: addTaskBtn,
+                saveTaskBtn: saveTaskBtn,
+                cancelTaskBtn: cancelTaskBtn,
+                aiCoachBtn: aiCoachBtn,
+                taskList: taskList
+            });
+            
+            if (addTaskBtn) {
+                addTaskBtn.onclick = function() {
+                    console.log('👆 Add button clicked!');
+                    toggleTaskForm();
+                };
+                console.log('✅ Add button listener attached');
+            } else {
+                console.error('❌ addTaskBtn not found!');
+            }
+            
+            if (saveTaskBtn) {
+                saveTaskBtn.onclick = function() {
+                    console.log('💾 Save button clicked!');
+                    addTask();
+                };
+                console.log('✅ Save button listener attached');
+            } else {
+                console.error('❌ saveTaskBtn not found!');
+            }
+            
+            if (cancelTaskBtn) {
+                cancelTaskBtn.onclick = function() {
+                    console.log('❌ Cancel button clicked!');
+                    toggleTaskForm();
+                };
+                console.log('✅ Cancel button listener attached');
+            } else {
+                console.error('❌ cancelTaskBtn not found!');
+            }
+            
+            if (aiCoachBtn) {
+                aiCoachBtn.onclick = function() {
+                    console.log('🤖 AI button clicked!');
+                    requestAICoach();
+                };
+                console.log('✅ AI button listener attached');
+            } else {
+                console.error('❌ aiCoachBtn not found!');
+            }
+            
+            // Event delegation for task list
+            if (taskList) {
+                taskList.onclick = function(e) {
+                    const button = e.target.closest('[data-action]');
+                    if (!button) return;
+                    
+                    const taskId = parseInt(button.dataset.taskId);
+                    const action = button.dataset.action;
+                    
+                    console.log(`✅ Task ${action}: ${taskId}`);
+                    
+                    if (action === 'complete') completeTask(taskId);
+                    else if (action === 'skip') skipTask(taskId);
+                    else if (action === 'delete') deleteTask(taskId);
+                };
+                console.log('✅ Task list delegation attached');
+            } else {
+                console.error('❌ taskList not found!');
+            }
+            
+            console.log('✅✅✅ ALL EVENT LISTENERS ATTACHED!');
+            console.log(`📊 Total tasks: ${tasks.length}`);
+        }, 100);
+    </script>
+</body>
+</html>

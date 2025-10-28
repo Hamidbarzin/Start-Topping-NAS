@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topping Empire AI Logistics - Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-attachment: fixed;
+            padding: 20px;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3), transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 119, 198, 0.3), transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(120, 219, 255, 0.3), transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 3em;
+            font-weight: 800;
+            margin-bottom: 50px;
+            text-shadow: 3px 3px 8px rgba(0,0,0,0.4), 0 0 30px rgba(255,255,255,0.2);
+            letter-spacing: -0.5px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background: linear-gradient(to bottom right, #ffffff, #fafafa);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 
+                0 10px 30px rgba(0,0,0,0.15),
+                0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,255,255,0.8);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 
+                0 20px 50px rgba(102, 126, 234, 0.3),
+                0 10px 20px rgba(118, 75, 162, 0.2);
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 18px;
+            font-size: 1.6em;
+            font-weight: 700;
+            border-bottom: 3px solid;
+            border-image: linear-gradient(90deg, #667eea, #764ba2) 1;
+            padding-bottom: 12px;
+            letter-spacing: -0.3px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .card p {
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.8;
+            font-size: 1.05em;
+            font-weight: 500;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card li {
+            padding: 12px 15px;
+            margin: 6px 0;
+            border-radius: 10px;
+            border: 1px solid #f0f0f0;
+            color: #666;
+            line-height: 1.7;
+            transition: all 0.3s ease;
+            background: linear-gradient(to right, rgba(255,255,255,0.5), rgba(250,250,250,0.5));
+        }
+
+        .card li:hover {
+            background: linear-gradient(to right, rgba(102, 126, 234, 0.03), rgba(118, 75, 162, 0.03));
+            border-color: #e0e0e0;
+            padding-right: 20px;
+        }
+
+        .card li:last-child {
+            border-bottom: none;
+        }
+
+        .goal {
+            color: #667eea !important;
+            font-weight: 700 !important;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(102, 126, 234, 0.05)) !important;
+            border-left: 4px solid #667eea !important;
+        }
+
+        .kpi {
+            color: #764ba2 !important;
+            font-weight: 700 !important;
+            background: linear-gradient(135deg, rgba(118, 75, 162, 0.1), rgba(118, 75, 162, 0.05)) !important;
+            border-left: 4px solid #764ba2 !important;
+        }
+
+        .progress {
+            color: #fff !important;
+            font-weight: 700 !important;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+            border: none !important;
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 4px 15px rgba(245, 87, 108, 0.3);
+            }
+            50% {
+                box-shadow: 0 4px 20px rgba(245, 87, 108, 0.5);
+            }
+        }
+
+        /* Input fields for KPI tracking */
+        .kpi-input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: white;
+            margin: 8px 0;
+        }
+
+        .kpi-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 25px;
+            background: #f0f0f0;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 10px 0;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 12px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8em;
+            font-weight: 700;
+        }
+
+        .progress-bar.good {
+            background: linear-gradient(90deg, #28a745, #20c997);
+        }
+
+        .progress-bar.medium {
+            background: linear-gradient(90deg, #ffc107, #fd7e14);
+        }
+
+        .progress-bar.bad {
+            background: linear-gradient(90deg, #f5576c, #e83e8c);
+        }
+
+        /* Button Styles */
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px 5px;
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .button-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .card input.kpi-input {
+            background: linear-gradient(to right, rgba(255,255,255,0.9), rgba(250,250,250,0.9));
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 30px;
+            font-size: 1.2em;
+            font-weight: 500;
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.1));
+            border-radius: 15px;
+            margin-top: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        @media (max-width: 768px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .card h2 {
+                font-size: 1.3em;
+            }
+
+            .card p {
+                font-size: 1em;
+            }
+
+            button {
+                display: block;
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Topping Empire AI Logistics - Dashboard</h1>
+        
+        <div class="cards-grid">
+            <!-- کارت ۱: مسیر بیزنس و هدف‌ها -->
+            <div class="card">
+                <h2>۱. مسیر بیزنس و هدف‌ها</h2>
+                <p>ساخت امپراتوری Barzin Holding با هسته لجستیک Topping Courier. تمرکز روی کانادا، آمریکای شمالی، اروپا (استونی به عنوان gateway)، آسیا-اقیانوسیه و آمریکای جنوبی.</p>
+                <ul>
+                    <li class="goal">هدف SMART: رسیدن به درآمد ۱ میلیارد دلار تا سال ۲۰۳۰ با رشد سالانه ۵۰%.</li>
+                    <li>بازارهای هدف: کانادا (۴۰%)، اروپا (۳۰%)، آسیا (۲۰%)، سایر (۱۰%).</li>
+                    <li class="kpi">KPIها: نرخ تحویل به‌موقع ۹۸%، حفظ مشتری ۹۰%، سهم بازار ۵% در آمریکای شمالی تا سال ۲۰۲۸.</li>
+                    <li class="progress">پیشرفت فعلی: فاز اولیه (۲۰% تکمیل) - ثبت شرکت در استونی.</li>
+                </ul>
+            </div>
+
+            <!-- کارت ۲: اقامت دیجیتال و ثبت شرکت -->
+            <div class="card">
+                <h2>۲. اقامت دیجیتال استونی و ثبت شرکت</h2>
+                <p>استفاده از e-Residency برای ورود به اتحادیه اروپا با مزایای مالیاتی و حقوقی.</p>
+                <ul>
+                    <li class="goal">هدف: ثبت شرکت در ۳ ماه، دریافت VAT اروپا در ۶ ماه.</li>
+                    <li>گام‌ها: ثبت subsidiary در کانادا و استونی، alliance با Bolt/Wise.</li>
+                    <li class="kpi">KPI: کاهش هزینه‌های مالیاتی به زیر ۱۵%، دسترسی به بازار ۵۰۰ میلیونی EU.</li>
+                    <li class="progress">پیشرفت: درخواست e-Residency (۱۰% تکمیل) - شروع فرآیند قانونی.</li>
+                </ul>
+            </div>
+
+            <!-- کارت ۳: ساختار و تیم‌سازی -->
+            <div class="card">
+                <h2>۳. ساختار و تیم‌سازی</h2>
+                <p>ساختار hybrid برای scaling سریع با تمرکز روی talent جهانی.</p>
+                <ul>
+                    <li class="goal">هدف: تیم اولیه ۳ نفره تا پایان ماه ۶، گسترش به ۵۰ نفر تا سال دوم.</li>
+                    <li>گام‌ها: استخدام مدیر عملیات، متخصص AI، outsourcing به 3PL providers مانند DHL.</li>
+                    <li class="kpi">KPI: نرخ turnover زیر ۱۰%، آموزش مداوم روی AI و compliance.</li>
+                    <li class="progress">پیشرفت: تیم هسته (۳۰% تکمیل) - استخدام اولیه.</li>
+                </ul>
+            </div>
+
+            <!-- کارت ۴: رشد و آینده‌نگری -->
+            <div class="card">
+                <h2>۴. رشد و آینده‌نگری</h2>
+                <p>مسیر پلکانی برای scaling جهانی با اندازه‌گیری مداوم.</p>
+                <ul>
+                    <li class="goal">۶ ماه اول: ۱۰۰ مشتری، درآمد ۱ میلیون دلار.</li>
+                    <li>سال اول-دوم: گسترش به اروپا/آسیا، ۵۰۰ مشتری، ۱۰ میلیون دلار.</li>
+                    <li>سال سوم-پنجم: پوشش ۵۰ کشور، ۱۰۰۰ کارمند، IPO احتمالی.</li>
+                    <li class="kpi">KPI: EBITDA margin بالای ۱۵%، quarterly reviews.</li>
+                    <li class="progress">پیشرفت: فاز تثبیت (۱۵% تکمیل).</li>
+                </ul>
+            </div>
+
+            <!-- کارت ۵: مزیت رقابتی و نوآوری -->
+            <div class="card">
+                <h2>۵. مزیت رقابتی و فوت کوزه‌گری</h2>
+                <p>تمرکز روی AI، sustainability و داستان برند منحصربه‌فرد.</p>
+                <ul>
+                    <li class="goal">هدف: ادغام AI برای کاهش هزینه ۲۵% تا سال دوم.</li>
+                    <li>گام‌ها: predictive analytics، بلاکچین برای traceability، کمپین‌های سبز با EVها.</li>
+                    <li class="kpi">KPI: NPS score بالای ۸۰، تحلیل رقبا با SEMrush.</li>
+                    <li class="progress">پیشرفت: توسعه AI (۲۵% تکمیل) - proof-of-concept.</li>
+                </ul>
+            </div>
+
+            <!-- کارت ۶: مدیریت مالی و funding -->
+            <div class="card">
+                <h2>۶. مدیریت مالی و funding (جدید)</h2>
+                <p>برنامه‌ریزی بودجه و جذب سرمایه برای رشد پایدار.</p>
+                <ul>
+                    <li class="goal">هدف: profitability در سال دوم، جذب ۱۰ میلیون دلار VC تا سال سوم.</li>
+                    <li>گام‌ها: bootstrapping اولیه، loans بانکی، pitch به investors در Toronto/استونی.</li>
+                    <li class="kpi">KPI: ROI بالای ۲۰%، بودجه R&D ۲۰% از درآمد.</li>
+                    <li class="progress">پیشرفت: بودجه اولیه (۱۰% تکمیل) - تنظیم مالیات.</li>
+                </ul>
+            </div>
+
+            <!-- کارت ۷: بازاریابی و فروش -->
+            <div class="card">
+                <h2>۷. بازاریابی و فروش (جدید)</h2>
+                <p>استراتژی جامع بازاریابی و فروش برای رشد پایدار.</p>
+                <ul>
+                    <li class="goal">هدف: ۱۰ میلیون دلار درآمد از فروش در سال اول.</li>
+                    <li>گام‌ها: inbound marketing، partnership با e-commerce platforms، referral program.</li>
+                    <li class="kpi">KPI: لید ماهانه ۲۰۰+، close rate ۳۰%، LTV: CAC ratio ۳:۱.</li>
+                    <li class="progress">پیشرفت: راه‌اندازی سیستم CRM (۲۰% تکمیل).</li>
+                </ul>
+            </div>
+
+            <!-- کارت ۸: استراتژی دیجیتال -->
+            <div class="card">
+                <h2>۸. استراتژی دیجیتال برای جذب مشتریان جهانی</h2>
+                <p>هدف: جذب مشتریان از سراسر جهان از طریق کانال‌های دیجیتال.</p>
+                <ul>
+                    <li class="goal">هدف: ۱۰۰۰ lead در سال اول از طریق LinkedIn/SEO.</li>
+                    <li>گام‌ها: content marketing، Google Ads، loyalty programs.</li>
+                    <li class="kpi">KPI: conversion rate ۱۵%، customer acquisition cost زیر ۲۰۰ دلار.</li>
+                    <li class="progress">پیشرفت: کمپین اولیه (۵% تکمیل).</li>
+                </ul>
+            </div>
+
+            <!-- کارت ۹: ریسک‌مدیریت و sustainability -->
+            <div class="card">
+                <h2>۹. ریسک‌مدیریت و sustainability (جدید)</h2>
+                <p>مدیریت چالش‌ها برای پایداری بلندمدت.</p>
+                <ul>
+                    <li class="goal">هدف: carbon-neutral تا سال ۲۰۲۸، بیمه جهانی.</li>
+                    <li>گام‌ها: diversification زنجیره، compliance با GDPR/ESG.</li>
+                    <li class="kpi">KPI: ریسک score زیر ۲۰%، audit سالانه.</li>
+                    <li class="progress">پیشرفت: ارزیابی اولیه (۱۰% تکمیل).</li>
+                </ul>
+            </div>
+
+            <!-- کارت ۱۰: اقدامات کلیدی برای Top 10 -->
+            <div class="card">
+                <h2>۱۰. اقدامات کلیدی برای ورود به Top 10</h2>
+                <p>گام‌های عملی برای رقابت با giants مانند DHL و UPS.</p>
+                <ul>
+                    <li>۱. تحقیق بازار: benchmark رقبا با Statista.</li>
+                    <li>۲. زیرساخت scalable: AWS برای عملیات.</li>
+                    <li>۳. گسترش: subsidiary در key markets.</li>
+                    <li>۴. نوآوری: ۲۰% بودجه به R&D AI/بلاکچین.</li>
+                    <li>۵. مشتری‌مداری: NPS بالای ۸۰.</li>
+                    <li>۶. funding: VC و M&A.</li>
+                    <li>۷. تیم: استخدام elite از LinkedIn.</li>
+                    <li>۸. اندازه‌گیری: dashboards با Tableau.</li>
+                    <li class="progress">پیشرفت کلی: ۱۵% - تمرکز روی اجرای گام‌ها.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button onclick="saveData()">💾 ذخیره داده‌ها</button>
+            <button onclick="exportData()">📊 دانلود گزارش CSV</button>
+            <button onclick="resetData()">🔄 بازنشانی</button>
+        </div>
+
+        <footer>
+            ساخته‌شده با ❤️ توسط   حمید برزین | Toronto, Canada
+        </footer>
+    </div>
+
+    <script>
+        // Save data to localStorage
+        function saveData() {
+            const inputs = document.querySelectorAll('.kpi-input');
+            inputs.forEach((input, index) => {
+                localStorage.setItem(`kpi_${index}`, input.value);
+            });
+            const saveBtn = event.target;
+            saveBtn.textContent = '✅ ذخیره شد!';
+            setTimeout(() => {
+                saveBtn.textContent = '💾 ذخیره داده‌ها';
+            }, 2000);
+        }
+
+        // Export data to CSV
+        function exportData() {
+            let csv = 'دسته,KPI,توضیح,هدف اولیه,آمار قبلی,آمار فعلی,پیشرفت\n';
+            
+            document.querySelectorAll('.card').forEach((card, cardIndex) => {
+                const title = card.querySelector('h2').textContent;
+                const description = card.querySelector('p').textContent;
+                
+                card.querySelectorAll('.kpi').forEach((kpi) => {
+                    const kpiText = kpi.textContent;
+                    const prevInput = kpi.nextElementSibling?.querySelector('.kpi-input[data-prev]');
+                    const currInput = kpi.nextElementSibling?.querySelector('.kpi-input[data-curr]');
+                    
+                    if (prevInput && currInput) {
+                        csv += `${title},${kpiText},${description},${kpiText},${prevInput.value || ''},${currInput.value || ''},محاسبه شده\n`;
+                    }
+                });
+            });
+
+            // Add BOM for UTF-8 encoding
+            const BOM = '\uFEFF';
+            const blob = new Blob([BOM + csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `topping_empire_kpi_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Reset all data
+        function resetData() {
+            if (confirm('آیا مطمئن هستید که می‌خواهید تمام داده‌ها را پاک کنید؟')) {
+                document.querySelectorAll('.kpi-input').forEach(input => {
+                    input.value = '';
+                });
+                localStorage.clear();
+                location.reload();
+            }
+        }
+
+        // Calculate progress bar for a KPI
+        function calculateProgress(input) {
+            const container = input.closest('.kpi-section');
+            const prevInput = container?.querySelector('[data-prev]');
+            const currInput = container?.querySelector('[data-curr]');
+            const targetInput = container?.querySelector('[data-target]');
+            const progressBar = container?.querySelector('.progress-bar');
+            const progressText = container?.querySelector('.progress-text');
+            
+            if (!prevInput || !currInput || !targetInput || !progressBar) return;
+            
+            const prev = parseFloat(prevInput.value) || 0;
+            const curr = parseFloat(currInput.value) || 0;
+            const target = parseFloat(targetInput.value) || 1;
+            
+            let percentage = (curr / target * 100).toFixed(1);
+            if (percentage > 100) percentage = 100;
+            
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = percentage + '%';
+            
+            if (percentage >= 90) {
+                progressBar.className = 'progress-bar good';
+            } else if (percentage >= 70) {
+                progressBar.className = 'progress-bar medium';
+            } else {
+                progressBar.className = 'progress-bar bad';
+            }
+            
+            if (progressText) {
+                const change = curr - prev;
+                progressText.textContent = `تغییر: ${change >= 0 ? '+' : ''}${change.toFixed(2)}`;
+            }
+        }
+
+        // Load saved data on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.kpi-input').forEach((input, index) => {
+                const saved = localStorage.getItem(`kpi_${index}`);
+                if (saved) {
+                    input.value = saved;
+                }
+                calculateProgress(input);
+            });
+        });
+
+        // Add event listeners to all inputs
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.kpi-input').forEach(input => {
+                input.addEventListener('input', () => {
+                    calculateProgress(input);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
