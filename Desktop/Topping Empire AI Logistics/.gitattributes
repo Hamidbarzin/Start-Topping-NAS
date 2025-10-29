@@ -1,0 +1,9 @@
+# Ensure proper line endings
+* text=auto
+
+# Node.js files
+package.json text
+package-lock.json text
+server.js text
+Procfile text
+render.yaml text
