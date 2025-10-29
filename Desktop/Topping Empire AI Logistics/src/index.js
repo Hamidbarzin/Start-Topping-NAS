@@ -134,4 +134,11 @@ app.listen(PORT, () => {
   console.log(`   🧪 تست xAI API: http://localhost:${PORT}/test-xai`);
   console.log(`   🚀 Topping: http://localhost:${PORT}/topping`);
   console.log(`   ⚡ Minimal: http://localhost:${PORT}/minimal`);
+
+  // Debug info for Render
+  console.log(`\n🔍 Debug Info:`);
+  console.log(`   Working directory: ${process.cwd()}`);
+  console.log(`   __dirname: ${__dirname}`);
+  console.log(`   PORT from env: ${process.env.PORT}`);
+  console.log(`   Node version: ${process.version}`);
 });
