@@ -3,6 +3,5 @@ services:
     name: topping-empire-ai-logistics
     env: node
     plan: free
-    rootDir: .
     buildCommand: npm install && npm run build
     startCommand: npm start
