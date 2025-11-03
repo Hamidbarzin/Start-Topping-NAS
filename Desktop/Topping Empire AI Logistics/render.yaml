@@ -3,5 +3,5 @@ services:
     name: topping-empire-ai-logistics
     env: node
     plan: free
-    buildCommand: npm install && npm run build
-    startCommand: npm start
+    buildCommand: cd /opt/render/project && npm install && npm run build
+    startCommand: cd /opt/render/project && npm start
