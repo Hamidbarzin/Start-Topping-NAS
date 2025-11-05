@@ -1,0 +1,893 @@
+<!--
+  ============================================================================
+  NAS Playbook 2026–2027 — Topping Courier
+  ============================================================================
+  
+  CHANGELOG (Refactored):
+  - Added bilingual support (FA/EN) with .i18n pattern
+  - Improved HTML readability with consistent 2-space indentation
+  - Added semantic HTML5 landmarks (<header>, <main>, <nav>, <section>)
+  - Enhanced accessibility with proper ARIA attributes
+  - Implemented localStorage-based language persistence
+  - Added comprehensive i18n wrappers for all user-visible text
+  - Preserved 100% of existing visual design and CSS
+  - No changes to class names, IDs, or data attributes
+  
+  ============================================================================
+-->
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NAS Playbook 2026–2027</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Vazirmatn:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="nas-glassmorphic-theme.css" rel="stylesheet">
+</head>
+
+<body class="lang-en">
+  <!-- ===== Main Layout Container ===== -->
+  <div class="layout">
+    
+    <!-- ===== Sidebar Navigation (Start) ===== -->
+    <aside role="complementary" aria-label="Sidebar navigation">
+      
+      <!-- Logo Section -->
+      <div class="logo">
+        <div class="mark" role="img" aria-label="Topping Courier logo"></div>
+        <div>
+          <h1>
+            <span class="i18n i18n-en">Topping Courier — NAS</span>
+            <span class="i18n i18n-fa" dir="rtl">تاپینگ کوریر — NAS</span>
+          </h1>
+          <div class="sub">
+            <span class="i18n i18n-en">NAS Playbook 2026–2027</span>
+            <span class="i18n i18n-fa" dir="rtl">پلی‌بوک NAS ۲۰۲۶–۲۰۲۷</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- ===== Language Toggle (Start) ===== -->
+      <div class="pill" role="group" aria-label="Language toggle">
+        <button id="btn-en" class="btn active" type="button" aria-pressed="true">EN</button>
+        <button id="btn-fa" class="btn" type="button" aria-pressed="false">FA</button>
+      </div>
+      <!-- ===== Language Toggle (End) ===== -->
+      
+      <!-- Export Button -->
+      <div class="export">
+        <button class="btn" type="button" onclick="window.print()">
+          <span class="i18n i18n-en">Export PDF</span>
+          <span class="i18n i18n-fa" dir="rtl">خروجی PDF</span>
+        </button>
+      </div>
+      
+      <div class="hr" role="separator"></div>
+      
+            <!-- Navigation Menu -->
+      <nav class="nav" role="navigation" aria-label="Main navigation">
+        <a href="index.html" style="background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: #000; font-weight: 700; box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);">
+          <span class="i18n i18n-en">🏠 Home</span>
+          <span class="i18n i18n-fa" dir="rtl">🏠 خانه</span>
+        </a>
+        
+        <div class="hr"></div>
+        
+        <a href="NAS-Plan-Toronto-Pilot-Fasle1.html" style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05)); border: 2px solid var(--gold);">
+          <span class="i18n i18n-en">📋 Phase 1 — Toronto Pilot</span>
+          <span class="i18n i18n-fa" dir="rtl">📋 فصل ۱ — پایلوت تورنتو</span>
+        </a>
+        
+      </nav>
+      
+    </aside>
+    <!-- ===== Sidebar Navigation (End) ===== -->
+    
+    <!-- ===== Main Content Area (Start) ===== -->
+    <main role="main">
+      
+      <!-- Page Header -->
+      <header>
+        <div>
+          <div class="breadcrumbs">
+            <span class="i18n i18n-en">NAS Empire → Year 2026–2027 → Foundation & Outsourcing (Canada)</span>
+            <span class="i18n i18n-fa" dir="rtl">امپراتوری NAS ← سال ۲۰۲۶–۲۰۲۷ ← پایه‌گذاری و برون‌سپاری (کانادا)</span>
+          </div>
+          <h2 style="margin:.25rem 0 0">
+            <span class="i18n i18n-en">Annual Execution Dashboard</span>
+            <span class="i18n i18n-fa" dir="rtl">داشبورد اجرای سالانه</span>
+          </h2>
+        </div>
+      </header>
+      <!-- ===== Executive Summary Section ===== -->
+      <section id="exec" class="card">
+        <h2>
+          <span class="i18n i18n-en">Executive Summary</span>
+          <span class="i18n i18n-fa" dir="rtl">چکیده اجرایی</span>
+        </h2>
+        <div class="grid g2">
+          <div class="i18n i18n-en block">
+            <p><strong>Goal:</strong> Foundation & national outsourcing; prepare EU/MENA launch. Toronto as HQ. Revenue: $15–20M (Realistic) or $50M (Ambitious).</p>
+            <ul>
+              <li>Q1 — Outsource Canada (contract + AI dispatch baseline)</li>
+              <li>Q2 — Controlled international start</li>
+              <li>Q3 — AI scaling (routing & ETA)</li>
+              <li>Q4 — Optimization, ESG, investor readiness</li>
+            </ul>
+          </div>
+          <div class="i18n i18n-fa block" dir="rtl">
+            <p><strong>هدف:</strong> پایه‌گذاری و برون‌سپاری ملی؛ آماده‌سازی پرتاب بین‌المللی اروپا/منا. تورنتو HQ. سناریو درآمد: ۱۵–۲۰M یا ۵۰M.</p>
+            <ul>
+              <li>فصل ۱ — برون‌سپاری کانادا</li>
+              <li>فصل ۲ — شروع کنترل‌شده بین‌المللی</li>
+              <li>فصل ۳ — گسترش هوش مصنوعی</li>
+              <li>فصل ۴ — بهینه‌سازی و آمادگی سرمایه‌گذار</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      
+      <!-- ===== NAS Framework Section ===== -->
+      <section id="nas" class="cards">
+        <div class="card">
+          <h3>N — Network</h3>
+          <p class="soft">
+            <span class="i18n i18n-en">Partnerships, reps, hubs.</span>
+            <span class="i18n i18n-fa" dir="rtl">مشارکت‌ها، نمایندگان، هاب‌ها.</span>
+          </p>
+        </div>
+        <div class="card">
+          <h3>A — AI</h3>
+          <p>
+            <span class="i18n i18n-en">Dispatch, routing, predictive ETA, analytics.</span>
+            <span class="i18n i18n-fa" dir="rtl">اعزام، مسیریابی، ETA پیش‌بینی، تحلیل‌گری.</span>
+          </p>
+        </div>
+        <div class="card">
+          <h3>S — Secure</h3>
+          <p>
+            <span class="i18n i18n-en">Compliance, data protection, ESG governance.</span>
+            <span class="i18n i18n-fa" dir="rtl">انطباق، حفاظت داده، حاکمیت ESG.</span>
+          </p>
+        </div>
+        <div class="card">
+          <h3>Swift</h3>
+          <p>
+            <span class="i18n i18n-en">Speed/SLA, latency cuts, delivery excellence.</span>
+            <span class="i18n i18n-fa" dir="rtl">سرعت/SLA، کاهش تأخیر، تحویل عالی.</span>
+          </p>
+        </div>
+      </section>
+      <!-- ===== Q1 Section ===== -->
+      <section class="card">
+        <h2>
+          <span class="i18n i18n-en">Q1 — Nov 2026 – Jan 2027</span>
+          <span class="i18n i18n-fa" dir="rtl">فصل ۱ — نوامبر ۲۰۲۶ – ژانویه ۲۰۲۷</span>
+        </h2>
+        <div class="grid g3">
+          
+          <div id="q1-m1" class="card">
+            <h3>
+              <span class="i18n i18n-en">M1 — Outsourcing Blueprint</span>
+              <span class="i18n i18n-fa" dir="rtl">ماه ۱ — طرح برون‌سپاری</span>
+            </h3>
+            <ul>
+              <li>
+                <strong><span class="i18n i18n-en">Objective:</span><span class="i18n i18n-fa" dir="rtl">هدف:</span></strong>
+                <span class="i18n i18n-en">Finalize outsourcing model & SoW</span>
+                <span class="i18n i18n-fa" dir="rtl">نهایی‌سازی مدل برون‌سپاری و SoW</span>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">Key Actions:</span><span class="i18n i18n-fa" dir="rtl">اقدامات کلیدی:</span></strong>
+                <ul>
+                  <li><span class="i18n i18n-en">RFP close & shortlist 2–3 partners</span><span class="i18n i18n-fa" dir="rtl">بستن RFP و فهرست کوتاه ۲–۳ شریک</span></li>
+                  <li><span class="i18n i18n-en">Due diligence & site visits</span><span class="i18n i18n-fa" dir="rtl">بررسی دقیق و بازدید از سایت</span></li>
+                  <li><span class="i18n i18n-en">Draft legal & SLA matrices</span><span class="i18n i18n-fa" dir="rtl">پیش‌نویس قانونی و ماتریس‌های SLA</span></li>
+                </ul>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">Expected Outcome:</span><span class="i18n i18n-fa" dir="rtl">نتیجه مورد انتظار:</span></strong>
+                <span class="i18n i18n-en">Ready-to-sign national outsourcing contract</span>
+                <span class="i18n i18n-fa" dir="rtl">قرارداد برون‌سپاری ملی آماده امضا</span>
+              </li>
+              <li>
+                <strong>KPIs:</strong>
+                <span class="i18n i18n-en">Partner score ≥85/100 • Legal gaps ≤3 • Cost delta ≤10%</span>
+                <span class="i18n i18n-fa" dir="rtl">امتیاز شریک ≥۸۵/۱۰۰ • شکاف‌های قانونی ≤۳ • دلتای هزینه ≤۱۰٪</span>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">NAS Principle:</span><span class="i18n i18n-fa" dir="rtl">اصل NAS:</span></strong>
+                Network
+              </li>
+            </ul>
+          </div>
+          
+          <div id="q1-m2" class="card">
+            <h3>
+              <span class="i18n i18n-en">M2 — Contract & Transition Plan</span>
+              <span class="i18n i18n-fa" dir="rtl">ماه ۲ — قرارداد و برنامه انتقال</span>
+            </h3>
+            <ul>
+              <li>
+                <strong><span class="i18n i18n-en">Objective:</span><span class="i18n i18n-fa" dir="rtl">هدف:</span></strong>
+                <span class="i18n i18n-en">Sign MSA; freeze cutover plan</span>
+                <span class="i18n i18n-fa" dir="rtl">امضای MSA؛ تثبیت برنامه انتقال</span>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">Key Actions:</span><span class="i18n i18n-fa" dir="rtl">اقدامات کلیدی:</span></strong>
+                <ul>
+                  <li><span class="i18n i18n-en">Sign MSA & DPA</span><span class="i18n i18n-fa" dir="rtl">امضای MSA و DPA</span></li>
+                  <li><span class="i18n i18n-en">Publish transition calendar</span><span class="i18n i18n-fa" dir="rtl">انتشار تقویم انتقال</span></li>
+                  <li><span class="i18n i18n-en">Runbook v1 & playbooks</span><span class="i18n i18n-fa" dir="rtl">راهنمای عملیاتی v1 و پلی‌بوک‌ها</span></li>
+                </ul>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">Expected Outcome:</span><span class="i18n i18n-fa" dir="rtl">نتیجه مورد انتظار:</span></strong>
+                <span class="i18n i18n-en">Signed MSA + D-60 transition plan</span>
+                <span class="i18n i18n-fa" dir="rtl">MSA امضا شده + برنامه انتقال D-60</span>
+              </li>
+              <li>
+                <strong>KPIs:</strong>
+                <span class="i18n i18n-en">SLA coverage 100% • Handover packs 100% • Risk register ready</span>
+                <span class="i18n i18n-fa" dir="rtl">پوشش SLA ۱۰۰٪ • بسته‌های تحویل ۱۰۰٪ • ثبت ریسک آماده</span>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">NAS Principle:</span><span class="i18n i18n-fa" dir="rtl">اصل NAS:</span></strong>
+                Secure
+              </li>
+            </ul>
+          </div>
+          
+          <div id="q1-m3" class="card">
+            <h3>
+              <span class="i18n i18n-en">M3 — AI Dispatch Baseline</span>
+              <span class="i18n i18n-fa" dir="rtl">ماه ۳ — خط پایه اعزام هوش مصنوعی</span>
+            </h3>
+            <ul>
+              <li>
+                <strong><span class="i18n i18n-en">Objective:</span><span class="i18n i18n-fa" dir="rtl">هدف:</span></strong>
+                <span class="i18n i18n-en">Launch dispatch AI baseline</span>
+                <span class="i18n i18n-fa" dir="rtl">راه‌اندازی خط پایه اعزام AI</span>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">Key Actions:</span><span class="i18n i18n-fa" dir="rtl">اقدامات کلیدی:</span></strong>
+                <ul>
+                  <li><span class="i18n i18n-en">Data model + API hooks</span><span class="i18n i18n-fa" dir="rtl">مدل داده + قلاب‌های API</span></li>
+                  <li><span class="i18n i18n-en">Pilot GTA routes</span><span class="i18n i18n-fa" dir="rtl">مسیرهای آزمایشی GTA</span></li>
+                  <li><span class="i18n i18n-en">Alerting & monitoring</span><span class="i18n i18n-fa" dir="rtl">هشدار و نظارت</span></li>
+                </ul>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">Expected Outcome:</span><span class="i18n i18n-fa" dir="rtl">نتیجه مورد انتظار:</span></strong>
+                <span class="i18n i18n-en">10–15% faster dispatch decisions</span>
+                <span class="i18n i18n-fa" dir="rtl">۱۰–۱۵٪ سریع‌تر در تصمیمات اعزام</span>
+              </li>
+              <li>
+                <strong>KPIs:</strong>
+                <span class="i18n i18n-en">Auto-assign ≥30% • Response time ↓15% • Error rate ↓10%</span>
+                <span class="i18n i18n-fa" dir="rtl">تخصیص خودکار ≥۳۰٪ • زمان پاسخ ↓۱۵٪ • نرخ خطا ↓۱۰٪</span>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">NAS Principle:</span><span class="i18n i18n-fa" dir="rtl">اصل NAS:</span></strong>
+                AI
+              </li>
+            </ul>
+          </div>
+          
+        </div>
+      </section>
+      
+      <!-- ===== Q2 Section ===== -->
+      <section class="card">
+        <h2>
+          <span class="i18n i18n-en">Q2 — Feb – Apr 2027</span>
+          <span class="i18n i18n-fa" dir="rtl">فصل ۲ — فوریه – آوریل ۲۰۲۷</span>
+        </h2>
+        <div class="grid g3">
+          
+          <div id="q2-m1" class="card">
+            <h3>
+              <span class="i18n i18n-en">M1 — Intl Region Selection</span>
+              <span class="i18n i18n-fa" dir="rtl">ماه ۱ — انتخاب منطقه بین‌المللی</span>
+            </h3>
+            <ul>
+              <li>
+                <strong><span class="i18n i18n-en">Objective:</span><span class="i18n i18n-fa" dir="rtl">هدف:</span></strong>
+                <span class="i18n i18n-en">Select EU or MENA</span>
+                <span class="i18n i18n-fa" dir="rtl">انتخاب اتحادیه اروپا یا منا</span>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">Key Actions:</span><span class="i18n i18n-fa" dir="rtl">اقدامات کلیدی:</span></strong>
+                <ul>
+                  <li><span class="i18n i18n-en">Scorecard: Germany vs Dubai</span><span class="i18n i18n-fa" dir="rtl">کارت امتیازی: آلمان در مقابل دبی</span></li>
+                  <li><span class="i18n i18n-en">Rep interviews & MoU</span><span class="i18n i18n-fa" dir="rtl">مصاحبه نماینده و تفاهم‌نامه</span></li>
+                  <li><span class="i18n i18n-en">Lane feasibility & cost model</span><span class="i18n i18n-fa" dir="rtl">امکان‌سنجی مسیر و مدل هزینه</span></li>
+                </ul>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">Expected Outcome:</span><span class="i18n i18n-fa" dir="rtl">نتیجه مورد انتظار:</span></strong>
+                <span class="i18n i18n-en">Chosen region + signed rep</span>
+                <span class="i18n i18n-fa" dir="rtl">منطقه انتخاب شده + نماینده امضا شده</span>
+              </li>
+              <li>
+                <strong>KPIs:</strong>
+                <span class="i18n i18n-en">Rep score ≥80 • Facility SLA ≥98% • Lane baseline set</span>
+                <span class="i18n i18n-fa" dir="rtl">امتیاز نماینده ≥۸۰ • SLA تسهیلات ≥۹۸٪ • خط پایه مسیر تنظیم شده</span>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">NAS Principle:</span><span class="i18n i18n-fa" dir="rtl">اصل NAS:</span></strong>
+                Network
+              </li>
+            </ul>
+          </div>
+          
+          <div id="q2-m2" class="card">
+            <h3>
+              <span class="i18n i18n-en">M2 — First Lanes & Compliance</span>
+              <span class="i18n i18n-fa" dir="rtl">ماه ۲ — اولین مسیرها و انطباق</span>
+            </h3>
+            <ul>
+              <li>
+                <strong><span class="i18n i18n-en">Objective:</span><span class="i18n i18n-fa" dir="rtl">هدف:</span></strong>
+                <span class="i18n i18n-en">Open first cross-border lanes</span>
+                <span class="i18n i18n-fa" dir="rtl">افتتاح اولین مسیرهای فرامرزی</span>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">Key Actions:</span><span class="i18n i18n-fa" dir="rtl">اقدامات کلیدی:</span></strong>
+                <ul>
+                  <li><span class="i18n i18n-en">Carrier scheduling (Emirates/Turkish/AC)</span><span class="i18n i18n-fa" dir="rtl">برنامه‌ریزی حمل‌کننده (امارات/ترکیش/AC)</span></li>
+                  <li><span class="i18n i18n-en">Customs docs & SOPs</span><span class="i18n i18n-fa" dir="rtl">اسناد گمرکی و SOPها</span></li>
+                  <li><span class="i18n i18n-en">Insurance & liabilities</span><span class="i18n i18n-fa" dir="rtl">بیمه و مسئولیت‌ها</span></li>
+                </ul>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">Expected Outcome:</span><span class="i18n i18n-fa" dir="rtl">نتیجه مورد انتظار:</span></strong>
+                <span class="i18n i18n-en">3 pilot shipments dispatched</span>
+                <span class="i18n i18n-fa" dir="rtl">۳ محموله آزمایشی ارسال شده</span>
+              </li>
+              <li>
+                <strong>KPIs:</strong>
+                <span class="i18n i18n-en">On-time ≥96% • Damage ≤0.5% • Cost within ±8% plan</span>
+                <span class="i18n i18n-fa" dir="rtl">به‌موقع ≥۹۶٪ • آسیب ≤۰.۵٪ • هزینه در محدوده ±۸٪ برنامه</span>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">NAS Principle:</span><span class="i18n i18n-fa" dir="rtl">اصل NAS:</span></strong>
+                Swift
+              </li>
+            </ul>
+          </div>
+          
+          <div id="q2-m3" class="card">
+            <h3>
+              <span class="i18n i18n-en">M3 — Intl Playbooks</span>
+              <span class="i18n i18n-fa" dir="rtl">ماه ۳ — پلی‌بوک‌های بین‌المللی</span>
+            </h3>
+            <ul>
+              <li>
+                <strong><span class="i18n i18n-en">Objective:</span><span class="i18n i18n-fa" dir="rtl">هدف:</span></strong>
+                <span class="i18n i18n-en">Standardize intl ops</span>
+                <span class="i18n i18n-fa" dir="rtl">استانداردسازی عملیات بین‌المللی</span>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">Key Actions:</span><span class="i18n i18n-fa" dir="rtl">اقدامات کلیدی:</span></strong>
+                <ul>
+                  <li><span class="i18n i18n-en">SOPs & escalation tree</span><span class="i18n i18n-fa" dir="rtl">SOPها و درخت تشدید</span></li>
+                  <li><span class="i18n i18n-en">Carrier SLAs finalized</span><span class="i18n i18n-fa" dir="rtl">SLAهای حمل‌کننده نهایی شده</span></li>
+                  <li><span class="i18n i18n-en">Training & certification</span><span class="i18n i18n-fa" dir="rtl">آموزش و گواهینامه</span></li>
+                </ul>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">Expected Outcome:</span><span class="i18n i18n-fa" dir="rtl">نتیجه مورد انتظار:</span></strong>
+                <span class="i18n i18n-en">Reproducible EU/MENA runbook</span>
+                <span class="i18n i18n-fa" dir="rtl">راهنمای عملیاتی قابل تکرار اروپا/منا</span>
+              </li>
+              <li>
+                <strong>KPIs:</strong>
+                <span class="i18n i18n-en">SOP coverage 100% • Esc time ↓20% • SLA breach ≤1%</span>
+                <span class="i18n i18n-fa" dir="rtl">پوشش SOP ۱۰۰٪ • زمان تشدید ↓۲۰٪ • نقض SLA ≤۱٪</span>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">NAS Principle:</span><span class="i18n i18n-fa" dir="rtl">اصل NAS:</span></strong>
+                Secure
+              </li>
+            </ul>
+          </div>
+          
+        </div>
+      </section>
+      
+      <!-- ===== Q3 Section ===== -->
+      <section class="card">
+        <h2>
+          <span class="i18n i18n-en">Q3 — May – Aug 2027</span>
+          <span class="i18n i18n-fa" dir="rtl">فصل ۳ — می – اوت ۲۰۲۷</span>
+        </h2>
+        <div class="grid g3">
+          
+          <div id="q3-m1" class="card">
+            <h3>
+              <span class="i18n i18n-en">M1 — Routing Optimizer v1</span>
+              <span class="i18n i18n-fa" dir="rtl">ماه ۱ — بهینه‌ساز مسیریابی نسخه ۱</span>
+            </h3>
+            <ul>
+              <li>
+                <strong><span class="i18n i18n-en">Objective:</span><span class="i18n i18n-fa" dir="rtl">هدف:</span></strong>
+                <span class="i18n i18n-en">Deploy routing optimizer v1</span>
+                <span class="i18n i18n-fa" dir="rtl">استقرار بهینه‌ساز مسیریابی نسخه ۱</span>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">Key Actions:</span><span class="i18n i18n-fa" dir="rtl">اقدامات کلیدی:</span></strong>
+                <ul>
+                  <li><span class="i18n i18n-en">Historical data ingestion</span><span class="i18n i18n-fa" dir="rtl">دریافت داده‌های تاریخی</span></li>
+                  <li><span class="i18n i18n-en">Model tuning</span><span class="i18n i18n-fa" dir="rtl">تنظیم مدل</span></li>
+                  <li><span class="i18n i18n-en">Shadow mode → live</span><span class="i18n i18n-fa" dir="rtl">حالت سایه → زنده</span></li>
+                </ul>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">Expected Outcome:</span><span class="i18n i18n-fa" dir="rtl">نتیجه مورد انتظار:</span></strong>
+                <span class="i18n i18n-en">Lane cost ↓5–7%</span>
+                <span class="i18n i18n-fa" dir="rtl">هزینه مسیر ↓۵–۷٪</span>
+              </li>
+              <li>
+                <strong>KPIs:</strong>
+                <span class="i18n i18n-en">Route time ↓8% • Fuel burn ↓6%</span>
+                <span class="i18n i18n-fa" dir="rtl">زمان مسیر ↓۸٪ • مصرف سوخت ↓۶٪</span>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">NAS Principle:</span><span class="i18n i18n-fa" dir="rtl">اصل NAS:</span></strong>
+                AI
+              </li>
+            </ul>
+          </div>
+          
+          <div id="q3-m2" class="card">
+            <h3>
+              <span class="i18n i18n-en">M2 — Predictive ETA</span>
+              <span class="i18n i18n-fa" dir="rtl">ماه ۲ — ETA پیش‌بینی</span>
+            </h3>
+            <ul>
+              <li>
+                <strong><span class="i18n i18n-en">Objective:</span><span class="i18n i18n-fa" dir="rtl">هدف:</span></strong>
+                <span class="i18n i18n-en">Deploy predictive ETA in prod</span>
+                <span class="i18n i18n-fa" dir="rtl">استقرار ETA پیش‌بینی در تولید</span>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">Key Actions:</span><span class="i18n i18n-fa" dir="rtl">اقدامات کلیدی:</span></strong>
+                <ul>
+                  <li><span class="i18n i18n-en">Feature store & drift checks</span><span class="i18n i18n-fa" dir="rtl">ذخیره ویژگی و بررسی انحراف</span></li>
+                  <li><span class="i18n i18n-en">Monitoring & alerts</span><span class="i18n i18n-fa" dir="rtl">نظارت و هشدارها</span></li>
+                  <li><span class="i18n i18n-en">CS playbook updates</span><span class="i18n i18n-fa" dir="rtl">به‌روزرسانی پلی‌بوک خدمات مشتری</span></li>
+                </ul>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">Expected Outcome:</span><span class="i18n i18n-fa" dir="rtl">نتیجه مورد انتظار:</span></strong>
+                <span class="i18n i18n-en">ETA accuracy ±8–10 min</span>
+                <span class="i18n i18n-fa" dir="rtl">دقت ETA ±۸–۱۰ دقیقه</span>
+              </li>
+              <li>
+                <strong>KPIs:</strong>
+                <span class="i18n i18n-en">On-time ≥97% • Support tickets ↓20%</span>
+                <span class="i18n i18n-fa" dir="rtl">به‌موقع ≥۹۷٪ • تیکت‌های پشتیبانی ↓۲۰٪</span>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">NAS Principle:</span><span class="i18n i18n-fa" dir="rtl">اصل NAS:</span></strong>
+                Swift
+              </li>
+            </ul>
+          </div>
+          
+          <div id="q3-m3" class="card">
+            <h3>
+              <span class="i18n i18n-en">M3 — Feedback Loops</span>
+              <span class="i18n i18n-fa" dir="rtl">ماه ۳ — حلقه‌های بازخورد</span>
+            </h3>
+            <ul>
+              <li>
+                <strong><span class="i18n i18n-en">Objective:</span><span class="i18n i18n-fa" dir="rtl">هدف:</span></strong>
+                <span class="i18n i18n-en">Close ops→data→model loop</span>
+                <span class="i18n i18n-fa" dir="rtl">بستن حلقه عملیات→داده→مدل</span>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">Key Actions:</span><span class="i18n i18n-fa" dir="rtl">اقدامات کلیدی:</span></strong>
+                <ul>
+                  <li><span class="i18n i18n-en">Postmortems & AB tests</span><span class="i18n i18n-fa" dir="rtl">تشریح پس از رویداد و تست‌های AB</span></li>
+                  <li><span class="i18n i18n-en">Retraining cadence</span><span class="i18n i18n-fa" dir="rtl">ریتم بازآموزی</span></li>
+                  <li><span class="i18n i18n-en">Backlog triage</span><span class="i18n i18n-fa" dir="rtl">اولویت‌بندی عقب‌افتادگی</span></li>
+                </ul>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">Expected Outcome:</span><span class="i18n i18n-fa" dir="rtl">نتیجه مورد انتظار:</span></strong>
+                <span class="i18n i18n-en">Sustained automation growth</span>
+                <span class="i18n i18n-fa" dir="rtl">رشد پایدار اتوماسیون</span>
+              </li>
+              <li>
+                <strong>KPIs:</strong>
+                <span class="i18n i18n-en">Automation ≥60% • Cost/stop ↓10%</span>
+                <span class="i18n i18n-fa" dir="rtl">اتوماسیون ≥۶۰٪ • هزینه/توقف ↓۱۰٪</span>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">NAS Principle:</span><span class="i18n i18n-fa" dir="rtl">اصل NAS:</span></strong>
+                Secure
+              </li>
+            </ul>
+          </div>
+          
+        </div>
+      </section>
+      
+      <!-- ===== Q4 Section ===== -->
+      <section class="card">
+        <h2>
+          <span class="i18n i18n-en">Q4 — Sep – Nov 2027</span>
+          <span class="i18n i18n-fa" dir="rtl">فصل ۴ — سپتامبر – نوامبر ۲۰۲۷</span>
+        </h2>
+        <div class="grid g3">
+          
+          <div id="q4-m1" class="card">
+            <h3>
+              <span class="i18n i18n-en">M1 — ESG Audit</span>
+              <span class="i18n i18n-fa" dir="rtl">ماه ۱ — ممیزی ESG</span>
+            </h3>
+            <ul>
+              <li>
+                <strong><span class="i18n i18n-en">Objective:</span><span class="i18n i18n-fa" dir="rtl">هدف:</span></strong>
+                <span class="i18n i18n-en">Complete ESG readiness & gaps</span>
+                <span class="i18n i18n-fa" dir="rtl">تکمیل آمادگی و شکاف‌های ESG</span>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">Key Actions:</span><span class="i18n i18n-fa" dir="rtl">اقدامات کلیدی:</span></strong>
+                <ul>
+                  <li><span class="i18n i18n-en">CO₂ baseline & routing impact</span><span class="i18n i18n-fa" dir="rtl">خط پایه CO₂ و تأثیر مسیریابی</span></li>
+                  <li><span class="i18n i18n-en">Policy & governance docs</span><span class="i18n i18n-fa" dir="rtl">اسناد سیاست و حاکمیت</span></li>
+                  <li><span class="i18n i18n-en">Supplier ESG checks</span><span class="i18n i18n-fa" dir="rtl">بررسی ESG تأمین‌کنندگان</span></li>
+                </ul>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">Expected Outcome:</span><span class="i18n i18n-fa" dir="rtl">نتیجه مورد انتظار:</span></strong>
+                <span class="i18n i18n-en">Pass audit with actions</span>
+                <span class="i18n i18n-fa" dir="rtl">قبولی در ممیزی با اقدامات</span>
+              </li>
+              <li>
+                <strong>KPIs:</strong>
+                <span class="i18n i18n-en">CO₂ ↓15–20% • Policy coverage 100%</span>
+                <span class="i18n i18n-fa" dir="rtl">CO₂ ↓۱۵–۲۰٪ • پوشش سیاست ۱۰۰٪</span>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">NAS Principle:</span><span class="i18n i18n-fa" dir="rtl">اصل NAS:</span></strong>
+                Secure
+              </li>
+            </ul>
+          </div>
+          
+          <div id="q4-m2" class="card">
+            <h3>
+              <span class="i18n i18n-en">M2 — Profitability Review</span>
+              <span class="i18n i18n-fa" dir="rtl">ماه ۲ — بررسی سودآوری</span>
+            </h3>
+            <ul>
+              <li>
+                <strong><span class="i18n i18n-en">Objective:</span><span class="i18n i18n-fa" dir="rtl">هدف:</span></strong>
+                <span class="i18n i18n-en">Quarterly margin uplift plan</span>
+                <span class="i18n i18n-fa" dir="rtl">برنامه افزایش حاشیه فصلی</span>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">Key Actions:</span><span class="i18n i18n-fa" dir="rtl">اقدامات کلیدی:</span></strong>
+                <ul>
+                  <li><span class="i18n i18n-en">Lane P&L analysis</span><span class="i18n i18n-fa" dir="rtl">تحلیل سود و زیان مسیر</span></li>
+                  <li><span class="i18n i18n-en">Price elasticity tests</span><span class="i18n i18n-fa" dir="rtl">تست‌های کشش قیمت</span></li>
+                  <li><span class="i18n i18n-en">Cost lever playbook</span><span class="i18n i18n-fa" dir="rtl">پلی‌بوک اهرم هزینه</span></li>
+                </ul>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">Expected Outcome:</span><span class="i18n i18n-fa" dir="rtl">نتیجه مورد انتظار:</span></strong>
+                <span class="i18n i18n-en">Margin uplift playbook</span>
+                <span class="i18n i18n-fa" dir="rtl">پلی‌بوک افزایش حاشیه</span>
+              </li>
+              <li>
+                <strong>KPIs:</strong>
+                <span class="i18n i18n-en">Margin ≥40–45% • Waste ↓10%</span>
+                <span class="i18n i18n-fa" dir="rtl">حاشیه ≥۴۰–۴۵٪ • ضایعات ↓۱۰٪</span>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">NAS Principle:</span><span class="i18n i18n-fa" dir="rtl">اصل NAS:</span></strong>
+                Network
+              </li>
+            </ul>
+          </div>
+          
+          <div id="q4-m3" class="card">
+            <h3>
+              <span class="i18n i18n-en">M3 — Investor Pitch</span>
+              <span class="i18n i18n-fa" dir="rtl">ماه ۳ — ارائه به سرمایه‌گذار</span>
+            </h3>
+            <ul>
+              <li>
+                <strong><span class="i18n i18n-en">Objective:</span><span class="i18n i18n-fa" dir="rtl">هدف:</span></strong>
+                <span class="i18n i18n-en">Prepare 2028 investor cycle</span>
+                <span class="i18n i18n-fa" dir="rtl">آماده‌سازی چرخه سرمایه‌گذار ۲۰۲۸</span>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">Key Actions:</span><span class="i18n i18n-fa" dir="rtl">اقدامات کلیدی:</span></strong>
+                <ul>
+                  <li><span class="i18n i18n-en">Deck & metrics</span><span class="i18n i18n-fa" dir="rtl">ارائه و معیارها</span></li>
+                  <li><span class="i18n i18n-en">References & pipeline</span><span class="i18n i18n-fa" dir="rtl">مراجع و خط لوله</span></li>
+                  <li><span class="i18n i18n-en">Data room hygiene</span><span class="i18n i18n-fa" dir="rtl">بهداشت اتاق داده</span></li>
+                </ul>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">Expected Outcome:</span><span class="i18n i18n-fa" dir="rtl">نتیجه مورد انتظار:</span></strong>
+                <span class="i18n i18n-en">Investor-ready dossier</span>
+                <span class="i18n i18n-fa" dir="rtl">پرونده آماده سرمایه‌گذار</span>
+              </li>
+              <li>
+                <strong>KPIs:</strong>
+                <span class="i18n i18n-en">NDR ≥120% • CAC payback ≤2 mo • On-time ≥98%</span>
+                <span class="i18n i18n-fa" dir="rtl">NDR ≥۱۲۰٪ • بازگشت CAC ≤۲ ماه • به‌موقع ≥۹۸٪</span>
+              </li>
+              <li>
+                <strong><span class="i18n i18n-en">NAS Principle:</span><span class="i18n i18n-fa" dir="rtl">اصل NAS:</span></strong>
+                Swift
+              </li>
+            </ul>
+          </div>
+          
+        </div>
+      </section>
+      
+      <!-- ===== KPIs Dashboard Section ===== -->
+      <section id="kpis" class="card">
+        <h2>
+          <span class="i18n i18n-en">KPIs Dashboard</span>
+          <span class="i18n i18n-fa" dir="rtl">داشبورد KPIها</span>
+        </h2>
+        <div class="grid g3">
+          <div class="card">
+            <strong>
+              <span class="i18n i18n-en">On-time Delivery</span>
+              <span class="i18n i18n-fa" dir="rtl">تحویل به‌موقع</span>
+            </strong>
+            <div class="progress"><div class="bar" data-val="98"></div></div>
+            <p class="soft">
+              <span class="i18n i18n-en">Target ≥ 98%</span>
+              <span class="i18n i18n-fa" dir="rtl">هدف ≥ ۹۸٪</span>
+            </p>
+          </div>
+          <div class="card">
+            <strong>
+              <span class="i18n i18n-en">Margin</span>
+              <span class="i18n i18n-fa" dir="rtl">حاشیه</span>
+            </strong>
+            <div class="progress"><div class="bar" data-val="42"></div></div>
+            <p class="soft">
+              <span class="i18n i18n-en">Target ≥ 42%</span>
+              <span class="i18n i18n-fa" dir="rtl">هدف ≥ ۴۲٪</span>
+            </p>
+          </div>
+          <div class="card">
+            <strong>
+              <span class="i18n i18n-en">Automation</span>
+              <span class="i18n i18n-fa" dir="rtl">اتوماسیون</span>
+            </strong>
+            <div class="progress"><div class="bar" data-val="60"></div></div>
+            <p class="soft">
+              <span class="i18n i18n-en">Target ≥ 60%</span>
+              <span class="i18n i18n-fa" dir="rtl">هدف ≥ ۶۰٪</span>
+            </p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- ===== ESG & Sustainability Section ===== -->
+      <section id="esg" class="card">
+        <h2>
+          <span class="i18n i18n-en">ESG & Sustainability</span>
+          <span class="i18n i18n-fa" dir="rtl">ESG و پایداری</span>
+        </h2>
+        <div class="grid g3">
+          <div class="card">
+            <strong>
+              <span class="i18n i18n-en">CO₂ Reduction</span>
+              <span class="i18n i18n-fa" dir="rtl">کاهش CO₂</span>
+            </strong>
+            <div class="progress"><div class="bar" data-val="20"></div></div>
+            <p class="soft">
+              <span class="i18n i18n-en">Target 20% via AI routing</span>
+              <span class="i18n i18n-fa" dir="rtl">هدف ۲۰٪ از طریق مسیریابی AI</span>
+            </p>
+          </div>
+          <div class="card">
+            <strong>
+              <span class="i18n i18n-en">Compliance</span>
+              <span class="i18n i18n-fa" dir="rtl">انطباق</span>
+            </strong>
+            <div class="progress"><div class="bar" data-val="100"></div></div>
+            <p class="soft">
+              <span class="i18n i18n-en">Audit readiness</span>
+              <span class="i18n i18n-fa" dir="rtl">آمادگی ممیزی</span>
+            </p>
+          </div>
+          <div class="card">
+            <strong>
+              <span class="i18n i18n-en">Safety & Quality</span>
+              <span class="i18n i18n-fa" dir="rtl">ایمنی و کیفیت</span>
+            </strong>
+            <div class="progress"><div class="bar" data-val="97"></div></div>
+            <p class="soft">
+              <span class="i18n i18n-en">Damage ≤0.5%</span>
+              <span class="i18n i18n-fa" dir="rtl">آسیب ≤۰.۵٪</span>
+            </p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- ===== Investor Readiness Section ===== -->
+      <section id="investor" class="card">
+        <h2>
+          <span class="i18n i18n-en">Investor Readiness</span>
+          <span class="i18n i18n-fa" dir="rtl">آمادگی سرمایه‌گذار</span>
+        </h2>
+        <div class="grid g2">
+          <div class="card">
+            <ul>
+              <li>
+                <span class="i18n i18n-en">Publish quarterly growth & metrics.</span>
+                <span class="i18n i18n-fa" dir="rtl">انتشار رشد فصلی و معیارها.</span>
+              </li>
+              <li>
+                <span class="i18n i18n-en">References: carriers, customers, compliance.</span>
+                <span class="i18n i18n-fa" dir="rtl">مراجع: حمل‌کنندگان، مشتریان، انطباق.</span>
+              </li>
+              <li>
+                <span class="i18n i18n-en">Road to next-year milestones.</span>
+                <span class="i18n i18n-fa" dir="rtl">مسیر به نقاط عطف سال آینده.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="progress"><div class="bar" data-val="85"></div></div>
+            <p class="soft">
+              <span class="i18n i18n-en">Investor dossier completeness</span>
+              <span class="i18n i18n-fa" dir="rtl">کامل بودن پرونده سرمایه‌گذار</span>
+            </p>
+          </div>
+        </div>
+      </section>
+      
+    </main>
+    <!-- ===== Main Content Area (End) ===== -->
+    
+  </div>
+  <!-- ===== Main Layout Container (End) ===== -->
+  
+  <!-- ===== Language Toggle Script (Start) ===== -->
+  <script>
+    (function() {
+      const html = document.documentElement;
+      const body = document.body;
+      const btnEn = document.getElementById('btn-en');
+      const btnFa = document.getElementById('btn-fa');
+      
+      function applyLang(lang) {
+        const isFA = lang === 'fa';
+        
+        // Toggle body classes
+        body.classList.toggle('lang-fa', isFA);
+        body.classList.toggle('lang-en', !isFA);
+        
+        // Update HTML attributes
+        html.setAttribute('lang', isFA ? 'fa' : 'en');
+        html.setAttribute('dir', isFA ? 'rtl' : 'ltr');
+        
+        // Update button states
+        if (btnEn && btnFa) {
+          btnEn.classList.toggle('active', !isFA);
+          btnEn.setAttribute('aria-pressed', String(!isFA));
+          btnFa.classList.toggle('active', isFA);
+          btnFa.setAttribute('aria-pressed', String(isFA));
+        }
+        
+        // Re-initialize progress bars after language switch
+        document.querySelectorAll('.bar').forEach(el => {
+          const v = Number(el.dataset.val || 0);
+          el.style.width = Math.max(0, Math.min(100, v)) + '%';
+        });
+        
+        // Store preference
+        try {
+          localStorage.setItem('lang', lang);
+        } catch(e) {
+          // localStorage might be disabled
+        }
+      }
+      
+      // Initialize with stored language or default to EN
+      let storedLang = 'en';
+      try {
+        storedLang = localStorage.getItem('lang') || 'en';
+      } catch(e) {
+        // localStorage might be disabled
+      }
+      applyLang(storedLang);
+      
+      // Attach event listeners
+      if (btnEn) btnEn.addEventListener('click', () => applyLang('en'));
+      if (btnFa) btnFa.addEventListener('click', () => applyLang('fa'));
+      
+    })();
+    
+    // ===== Active Navigation Highlighting =====
+    (function() {
+      const navLinks = document.querySelectorAll('.nav a[href^="#"]');
+      
+      function getElementPosition(element) {
+        let top = 0;
+        while (element) {
+          top += element.offsetTop;
+          element = element.offsetParent;
+        }
+        return top;
+      }
+      
+      function updateActiveLink() {
+        const scrollPos = window.scrollY + 150;
+        let currentSection = null;
+        let closestDistance = Infinity;
+        
+        document.querySelectorAll('[id]').forEach(element => {
+          if (!element.id) return;
+          const elementTop = getElementPosition(element);
+          const elementBottom = elementTop + element.offsetHeight;
+          
+          if (scrollPos >= elementTop && scrollPos < elementBottom) {
+            const distance = Math.abs(scrollPos - elementTop);
+            if (distance < closestDistance) {
+              closestDistance = distance;
+              currentSection = element.id;
+            }
+          }
+        });
+        
+        navLinks.forEach(link => {
+          const href = link.getAttribute('href');
+          if (href && href.startsWith('#')) {
+            const targetId = href.substring(1);
+            if (targetId === currentSection) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          }
+        });
+      }
+      
+      let scrollTimeout;
+      window.addEventListener('scroll', function() {
+        if (scrollTimeout) clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(updateActiveLink, 50);
+      });
+      
+      window.addEventListener('hashchange', updateActiveLink);
+      setTimeout(updateActiveLink, 100);
+      
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+          if (href && href.startsWith('#')) {
+            e.preventDefault();
+            const targetId = href.substring(1);
+            const target = document.getElementById(targetId);
+            if (target) {
+              const targetTop = getElementPosition(target) - 80;
+              window.scrollTo({ top: targetTop, behavior: 'smooth' });
+              history.pushState(null, null, href);
+              setTimeout(updateActiveLink, 500);
+            }
+          }
+        });
+      });
+    })();
+</script>
+  <!-- ===== Language Toggle Script (End) ===== -->
+  
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!--
+  ============================================================================
+  NAS Playbook 2033-2034 — Topping Courier
+  ============================================================================
+  
+  CHANGELOG (Refactored):
+  - Added glassmorphic black-gold theme via external CSS
+  - Bilingual support (FA/EN) with .i18n pattern ready
+  - Improved HTML readability
+  - Enhanced accessibility with ARIA attributes
+  - localStorage-based language persistence
+  
+  ============================================================================
+-->
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>پلی‌بوک NAS 2033–2034</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Vazirmatn:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="nas-glassmorphic-theme.css" rel="stylesheet">
+
+</head>
+
+<body class="lang-fa">
+  <div class="layout">
+    <aside>
+      <div class="logo">
+        <div class="mark"></div>
+        <div>
+          <h1>Topping Courier — NAS</h1>
+          <div class="sub">NAS Playbook 2033–2034</div>
+        </div>
+      </div>
+      
+      <div class="export">
+        <button class="btn" onclick="window.print()">Export PDF</button>
+      </div>
+      <div class="hr"></div>            <!-- Navigation Menu -->
+      <nav class="nav" role="navigation" aria-label="Main navigation">
+        <a href="index.html" style="background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: #000; font-weight: 700; box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);">
+          🏠 خانه
+        </a>
+      </nav>
+    </aside>
+    <main>
+      <header>
+        <div>
+          <div class="breadcrumbs">
+            امپراتوری NAS ← سال ۲۰۳۳–۲۰۳۴ ← تعالی و کیفیت
+          </div>
+          <h2 style="حاشیه سود:.25rem 0 0">
+            داشبورد اجرایی سالانه
+          </h2>
+        </div>
+      </header>
+      <section id="exec" class="card">
+        <h2>
+          چکیده اجرایی
+        </h2>
+        <div class="grid g2">
+          <div><p><strong>Goal:</strong> Holding Formation & Global Governance. Execute by strict Year → Quarter → Month cadence.</p><ul><li>فصل ۱ — ساخت/secure capacity & structure</li><li>فصل ۲ — مقیاس‌پذیری lanes/process or هوش مصنوعی features</li><li>فصل ۳ — Operationalize & measure</li><li>فصل ۴ — بهینه‌سازی, govern, and prep next-year capital</li></ul></div>
+          <div><p><strong>هدف:</strong> Holding Formation & Global Governance. اجرای دقیق بر اساس سال→فصل→ماه.</p><ul><li>فصل ۱ — ایجاد/تأمین ظرفیت و ساختار</li><li>فصل ۲ — مقیاس‌پذیری مسیرها یا قابلیت‌های هوش مصنوعی</li><li>فصل ۳ — عملیاتی‌سازی و اندازه‌گیری</li><li>فصل ۴ — بهینه‌سازی، حاکمیت و آمادگی سرمایه سال بعد</li></ul></div>
+        </div>
+      </section>
+      <section id="nas" class="cards">
+        <div class="card">
+          <h3>N — شبکه</h3>
+          <p class="soft">
+            مشارکت‌ها، نمایندگان، هاب‌ها.
+          </p>
+        </div>
+        <div class="card">
+          <h3>A — هوش مصنوعی</h3>
+          <p>
+            اعزام، مسیریابی، پیش‌بینی ETA، تحلیل‌ها.
+          </p>
+        </div>
+        <div class="card">
+          <h3>S — امن</h3>
+          <p>
+            انطباق، حفاظت داده، حاکمیت ESG.
+          </p>
+        </div>
+        <div class="card">
+          <h3>سریع</h3>
+          <p>
+            سرعت/SLA، کاهش تأخیر، تعالی تحویل.
+          </p>
+        </div>
+      </section>
+      <section class="card">
+          <h2>فصل ۱ — Holding Formation & Global Governance — فصل ۱</h2>
+          <div class="grid g3">
+            
+    <div id="q1-m1" class="card">
+      <h3>ماه ۱ — HoldCo Setup</h3>
+      <ul>
+        <li><strong>هدف:</strong> Legal & governance</li>
+        <li><strong>اقدامات کلیدی:</strong> <ul><li>Board</li><li>charters</li><li>KPIs</li></ul></li>
+        <li><strong>نتیجه مورد انتظار:</strong> Global governance</li>
+        <li><strong>شاخص‌های کلیدی عملکرد:</strong> Board formed</li>
+        <li><strong>اصل NAS:</strong> امن</li>
+      </ul>
+    </div>
+            
+    <div id="q1-m2" class="card">
+      <h3>ماه ۲ — Subsidiaries</h3>
+      <ul>
+        <li><strong>هدف:</strong> EU/MENA entities</li>
+        <li><strong>اقدامات کلیدی:</strong> <ul><li>Tax & ops setup</li></ul></li>
+        <li><strong>نتیجه مورد انتظار:</strong> Risk ringfence</li>
+        <li><strong>شاخص‌های کلیدی عملکرد:</strong> Blackouts=0</li>
+        <li><strong>اصل NAS:</strong> شبکه</li>
+      </ul>
+    </div>
+            
+    <div id="q1-m3" class="card">
+      <h3>ماه ۳ — Reporting Stack</h3>
+      <ul>
+        <li><strong>هدف:</strong> Group reporting</li>
+        <li><strong>اقدامات کلیدی:</strong> <ul><li>BI</li><li>consolidation</li></ul></li>
+        <li><strong>نتیجه مورد انتظار:</strong> Transparency</li>
+        <li><strong>شاخص‌های کلیدی عملکرد:</strong> Close cycle ≤5d</li>
+        <li><strong>اصل NAS:</strong> هوش مصنوعی</li>
+      </ul>
+    </div>
+          </div>
+        </section><section class="card">
+          <h2>فصل ۲ — Holding Formation & Global Governance — فصل ۲</h2>
+          <div class="grid g3">
+            
+    <div id="q2-m1" class="card">
+      <h3>ماه ۱ — انطباق Depth</h3>
+      <ul>
+        <li><strong>هدف:</strong> Audit & certifications</li>
+        <li><strong>اقدامات کلیدی:</strong> <ul><li>SOC2</li><li>ISO</li><li>TMS audit</li></ul></li>
+        <li><strong>نتیجه مورد انتظار:</strong> Trust & risk mgmt</li>
+        <li><strong>شاخص‌های کلیدی عملکرد:</strong> Findings=0 critical</li>
+        <li><strong>اصل NAS:</strong> امن</li>
+      </ul>
+    </div>
+            
+    <div id="q2-m2" class="card">
+      <h3>ماه ۲ — Working Capital</h3>
+      <ul>
+        <li><strong>هدف:</strong> Terms & factoring</li>
+        <li><strong>اقدامات کلیدی:</strong> <ul><li>DSO/DPO tuning</li></ul></li>
+        <li><strong>نتیجه مورد انتظار:</strong> Cash runway</li>
+        <li><strong>شاخص‌های کلیدی عملکرد:</strong> DSO ↓ • DPO ↑</li>
+        <li><strong>اصل NAS:</strong> شبکه</li>
+      </ul>
+    </div>
+            
+    <div id="q2-m3" class="card">
+      <h3>ماه ۳ — Profit Engine</h3>
+      <ul>
+        <li><strong>هدف:</strong> Pricing levers</li>
+        <li><strong>اقدامات کلیدی:</strong> <ul><li>Lane GP targets</li><li>promos</li></ul></li>
+        <li><strong>نتیجه مورد انتظار:</strong> Profit velocity</li>
+        <li><strong>شاخص‌های کلیدی عملکرد:</strong> سود ناخالص/محموله ↑</li>
+        <li><strong>اصل NAS:</strong> هوش مصنوعی</li>
+      </ul>
+    </div>
+          </div>
+        </section><section class="card">
+          <h2>فصل ۳ — Holding Formation & Global Governance — فصل ۳</h2>
+          <div class="grid g3">
+            
+    <div id="q3-m1" class="card">
+      <h3>ماه ۱ — قیمت‌گذاری پویا</h3>
+      <ul>
+        <li><strong>هدف:</strong> راه‌اندازی dynamic pricing engine</li>
+        <li><strong>اقدامات کلیدی:</strong> <ul><li>مهندسی ویژگی</li><li>مدل‌سازی قیمت</li><li>تست A/B</li></ul></li>
+        <li><strong>نتیجه مورد انتظار:</strong> +3–5 pts حاشیه سود</li>
+        <li><strong>شاخص‌های کلیدی عملکرد:</strong> نرخ برد ↑ • سود ناخالص/محموله ↑</li>
+        <li><strong>اصل NAS:</strong> هوش مصنوعی</li>
+      </ul>
+    </div>
+            
+    <div id="q3-m2" class="card">
+      <h3>ماه ۲ — پیش‌بینی</h3>
+      <ul>
+        <li><strong>هدف:</strong> پیش‌بینی تقاضا و ظرفیت</li>
+        <li><strong>اقدامات کلیدی:</strong> <ul><li>مدل‌های سری زمانی</li><li>CI/CD</li></ul></li>
+        <li><strong>نتیجه مورد انتظار:</strong> Better برنامه‌ریزی</li>
+        <li><strong>شاخص‌های کلیدی عملکرد:</strong> خطای پیش‌بینی ≤۱۰٪</li>
+        <li><strong>اصل NAS:</strong> هوش مصنوعی</li>
+      </ul>
+    </div>
+            
+    <div id="q3-m3" class="card">
+      <h3>ماه ۳ — تقویت اتوماسیون</h3>
+      <ul>
+        <li><strong>هدف:</strong> RPA و اسناد خودکار</li>
+        <li><strong>اقدامات کلیدی:</strong> <ul><li>بارنامه الکترونیکی</li><li>اسناد الکترونیکی</li><li>APIهای کارگزار</li></ul></li>
+        <li><strong>نتیجه مورد انتظار:</strong> Less کار دستی</li>
+        <li><strong>شاخص‌های کلیدی عملکرد:</strong> اتوماسیون ≥۷۵٪</li>
+        <li><strong>اصل NAS:</strong> سریع</li>
+      </ul>
+    </div>
+          </div>
+        </section><section class="card">
+          <h2>فصل ۴ — Holding Formation & Global Governance — فصل ۴</h2>
+          <div class="grid g3">
+            
+    <div id="q4-m1" class="card">
+      <h3>ماه ۱ — HoldCo Setup</h3>
+      <ul>
+        <li><strong>هدف:</strong> Legal & governance</li>
+        <li><strong>اقدامات کلیدی:</strong> <ul><li>Board</li><li>charters</li><li>KPIs</li></ul></li>
+        <li><strong>نتیجه مورد انتظار:</strong> Global governance</li>
+        <li><strong>شاخص‌های کلیدی عملکرد:</strong> Board formed</li>
+        <li><strong>اصل NAS:</strong> امن</li>
+      </ul>
+    </div>
+            
+    <div id="q4-m2" class="card">
+      <h3>ماه ۲ — Subsidiaries</h3>
+      <ul>
+        <li><strong>هدف:</strong> EU/MENA entities</li>
+        <li><strong>اقدامات کلیدی:</strong> <ul><li>Tax & ops setup</li></ul></li>
+        <li><strong>نتیجه مورد انتظار:</strong> Risk ringfence</li>
+        <li><strong>شاخص‌های کلیدی عملکرد:</strong> Blackouts=0</li>
+        <li><strong>اصل NAS:</strong> شبکه</li>
+      </ul>
+    </div>
+            
+    <div id="q4-m3" class="card">
+      <h3>ماه ۳ — Reporting Stack</h3>
+      <ul>
+        <li><strong>هدف:</strong> Group reporting</li>
+        <li><strong>اقدامات کلیدی:</strong> <ul><li>BI</li><li>consolidation</li></ul></li>
+        <li><strong>نتیجه مورد انتظار:</strong> Transparency</li>
+        <li><strong>شاخص‌های کلیدی عملکرد:</strong> Close cycle ≤5d</li>
+        <li><strong>اصل NAS:</strong> هوش مصنوعی</li>
+      </ul>
+    </div>
+          </div>
+        </section>
+      <section id="kpis" class="card">
+      <h2>KPIs Dashboard</h2>
+      <div class="grid g3">
+        <div class="card"><strong>به‌موقع Delivery</strong><div class="progress"><div class="bar" data-val="99"></div></div><p class="soft">Target ≥ 99%</p></div>
+        <div class="card"><strong>Margin</strong><div class="progress"><div class="bar" data-val="49"></div></div><p class="soft">Target ≥ 49%</p></div>
+        <div class="card"><strong>اتوماسیون</strong><div class="progress"><div class="bar" data-val="85"></div></div><p class="soft">Target ≥ 85%</p></div>
+      </div>
+    </section>
+      <section id="esg" class="card">
+      <h2>ESG & Sustainability</h2>
+      <div class="grid g3">
+        <div class="card"><strong>CO₂ Reduction</strong><div class="progress"><div class="bar" data-val="36"></div></div><p class="soft">Target 36% via هوش مصنوعی routing</p></div>
+        <div class="card"><strong>انطباق</strong><div class="progress"><div class="bar" data-val="100"></div></div><p class="soft">Audit readiness</p></div>
+        <div class="card"><strong>Safety & Quality</strong><div class="progress"><div class="bar" data-val="99"></div></div><p class="soft">Damage ≤0.5%</p></div>
+      </div>
+    </section>
+      <section id="investor" class="card">
+      <h2>Investor Readiness</h2>
+      <div class="grid g2">
+        <div class="card">
+          <ul>
+            <li>Publish quarterly growth & metrics.</li>
+            <li>References: carriers, customers, compliance.</li>
+            <li>Road to next-year milestones.</li>
+          </ul>
+        </div>
+        <div class="card"><div class="progress"><div class="bar" data-val="96"></div></div><p class="soft">Investor dossier completeness</p></div>
+      </div>
+    </section>
+    </main>
+  </div>
+  
+</body></html>

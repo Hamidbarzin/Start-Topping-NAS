@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Topping Courier – NAS Toronto Pilot Plan (EN/FA)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cinzel:wght@600;800;900&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="nas-glassmorphic-theme.css" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0b0f;
+      --bg-2:#0f0f14;
+      --gold:#d4af37;
+      --gold-soft:#e2c766;
+      --muted:#bfbfbf;
+      --text:#f2f2f2;
+      --accent:linear-gradient(90deg, #b88a1b, #e7d089, #b88a1b);
+      --radius:18px;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    html,body{height:100%;}
+    body{
+      margin:0; background:radial-gradient(80% 120% at 20% 10%, #12121a 0%, var(--bg) 40%),
+                              radial-gradient(60% 90% at 120% -10%, #17171f 0%, var(--bg) 50%);
+      color:var(--text);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height:1.7; letter-spacing:.2px;
+    }
+    .hero{position:relative; padding:56px 24px 28px; text-align:center; border-bottom:1px solid rgba(212,175,55,.2);
+      background:radial-gradient(1200px 400px at 50% -60%, rgba(212,175,55,.15), transparent 60%),
+                 linear-gradient(180deg, rgba(255,255,255,.02), transparent 30%);
+    }
+    .brand{font-family:Cinzel, serif; font-weight:900; letter-spacing:.6px;}
+    .gold-text{background:var(--accent); -webkit-background-clip:text; background-clip:text; color:transparent;}
+    .subtitle{color:var(--muted); max-width:1000px; margin:10px auto 0;}
+    .toolbar{display:flex; gap:10px; justify-content:center; align-items:center; flex-wrap:wrap; margin:22px auto 0;}
+    .chip{color:#0b0b0f; background:var(--gold-soft); border:none; padding:10px 14px; border-radius:999px; font-weight:600; text-decoration:none; transition:transform .15s ease;}
+    .chip:hover{transform:translateY(-2px);}
+    .wrap{max-width:1400px; margin:0 auto; padding:30px 18px 80px;}
+    .bi{display:grid; gap:18px;}
+    @media(min-width:980px){ .bi{grid-template-columns:1fr 1fr;} }
+    .card{background:var(--bg-2); border:1px solid rgba(212,175,55,.18); border-radius:var(--radius); padding:22px 20px; box-shadow:var(--shadow);}
+    .section-title{font-family:Cinzel, serif; font-weight:800; font-size:24px; letter-spacing:.4px; margin:0 0 10px;}
+    .rule{display:block; height:3px; background:var(--accent); border-radius:6px; margin-top:8px; opacity:.9;}
+    h3{font-weight:800; margin:16px 0 8px;}
+    p{margin:10px 0;}
+    ul{margin:10px 0 10px 22px;}
+    li{margin:6px 0;}
+    .i18n-fa{direction:rtl; font-family:Vazirmatn, Tahoma, sans-serif;}
+    .i18n-fa ul{margin:10px 22px 10px 0;}
+    .callout{border:1px solid rgba(226,199,102,.45); background:linear-gradient(180deg, rgba(226,199,102,.08), rgba(226,199,102,.03)); padding:14px 16px; border-radius:14px;}
+    .grid{display:grid; gap:12px;}
+    @media(min-width:760px){ .grid-2{grid-template-columns:1fr 1fr;} .grid-3{grid-template-columns:1fr 1fr 1fr;} }
+    .kpi{display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border:1px dashed rgba(212,175,55,.35); border-radius:12px;}
+    .pill {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      gap: 10px;
+      background: rgba(15, 15, 20, 0.9);
+      padding: 8px 12px;
+      border-radius: 30px;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      backdrop-filter: blur(5px);
+    }
+    .pill button { background: none; border: 1px solid var(--gold); color: var(--gold-soft); padding: 6px 15px; border-radius: 15px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; }
+    .pill button:hover { background: rgba(212, 175, 55, 0.1); }
+    .pill button.active { background: var(--gold); color: #0b0b0f; }
+    
+    /* Sidebar Navigation */
+    .layout { display: flex; min-height: 100vh; }
+    aside { width: 260px; background: var(--bg-2); border-right: 1px solid rgba(212,175,55,.2); padding: 20px 0; position: fixed; left: 0; top: 0; height: 100vh; overflow-y: auto; z-index: 100; }
+    aside .logo { padding: 0 20px 15px; border-bottom: 1px solid rgba(212,175,55,.15); margin-bottom: 15px; }
+    aside .logo h1 { font-size: 18px; margin: 0; font-family: Cinzel, serif; }
+    aside .nav { display: flex; flex-direction: column; gap: 6px; padding: 0 12px; }
+    aside .nav a { display: block; padding: 10px 12px; border-radius: 8px; text-decoration: none; color: var(--text); font-size: 14px; transition: all 0.2s; border: 1px solid transparent; }
+    aside .nav a:hover { background: rgba(212,175,55,.1); border-color: rgba(212,175,55,.3); }
+    aside .nav a.active { background: rgba(212,175,55,.15); border-color: var(--gold); color: var(--gold); font-weight: 600; }
+    aside .hr { height: 1px; background: rgba(212,175,55,.15); margin: 12px 0; }
+    main.content-with-sidebar { flex: 1; margin-left: 260px; width: calc(100% - 260px); }
+    
+    footer{color:#b9b9b9; text-align:center; padding:30px 20px 60px;}
+    .small{font-size:13px; color:#a9a9a9;}
+    html{scroll-behavior:smooth;}
+  </style>
+</head>
+<body class="lang-en">
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside>
+      <div class="logo">
+        <h1>
+          <span class="gold-text i18n i18n-en">Toronto Pilot</span>
+          <span class="gold-text i18n i18n-fa" dir="rtl">پایلوت تورنتو</span>
+        </h1>
+        <div class="small" style="margin-top: 5px; color: var(--muted);">
+          <span class="i18n i18n-en">Phase 1</span>
+          <span class="i18n i18n-fa" dir="rtl">فصل ۱</span>
+        </div>
+      </div>
+      
+      <nav class="nav">
+        <a href="index.html" style="background: linear-gradient(135deg, var(--gold), var(--gold-soft)); color: #0b0b0f; font-weight: 700;">
+          <span class="i18n i18n-en">🏠 Dashboard</span>
+          <span class="i18n i18n-fa" dir="rtl">🏠 داشبورد</span>
+        </a>
+        
+        <a href="NAS_Playbook_2026-2027.html">
+          <span class="i18n i18n-en">📅 Playbook 2026-27</span>
+          <span class="i18n i18n-fa" dir="rtl">📅 پلی‌بوک ۲۶-۲۷</span>
+        </a>
+        
+        <div class="hr"></div>
+        
+        <a href="#exec">
+          <span class="i18n i18n-en">📊 Executive Summary</span>
+          <span class="i18n i18n-fa" dir="rtl">📊 خلاصه اجرایی</span>
+        </a>
+        
+        <a href="#nas">
+          <span class="i18n i18n-en">🎯 Mission & NAS DNA</span>
+          <span class="i18n i18n-fa" dir="rtl">🎯 مأموریت و DNA NAS</span>
+        </a>
+        
+        <a href="#market">
+          <span class="i18n i18n-en">📈 GTA Market</span>
+          <span class="i18n i18n-fa" dir="rtl">📈 بازار GTA</span>
+        </a>
+        
+        <a href="#comp">
+          <span class="i18n i18n-en">⚔️ Competition</span>
+          <span class="i18n i18n-fa" dir="rtl">⚔️ فضای رقابتی</span>
+        </a>
+        
+        <a href="#engine">
+          <span class="i18n i18n-en">🤖 NAS Engine</span>
+          <span class="i18n i18n-fa" dir="rtl">🤖 موتور NAS</span>
+        </a>
+        
+        <a href="#model">
+          <span class="i18n i18n-en">💰 Business Model</span>
+          <span class="i18n i18n-fa" dir="rtl">💰 مدل کسب‌وکار</span>
+        </a>
+        
+        <a href="#finance">
+          <span class="i18n i18n-en">💵 Financials</span>
+          <span class="i18n i18n-fa" dir="rtl">💵 نما مالی</span>
+        </a>
+        
+        <a href="#checklist">
+          <span class="i18n i18n-en">✅ Action Checklist</span>
+          <span class="i18n i18n-fa" dir="rtl">✅ چک‌لیست اقدامات</span>
+        </a>
+      </nav>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="content-with-sidebar">
+      <div class="pill">
+        <button id="btn-en" class="active" aria-pressed="true">EN</button>
+        <button id="btn-fa" aria-pressed="false">FA</button>
+      </div>
+
+      <header class="hero">
+    <h1 class="brand"><span class="gold-text">Topping Courier</span> — NAS Toronto Pilot Plan</h1>
+    <p class="subtitle">AI‑Powered Local Logistics | <span class="gold-text">Network · AI · Secure & Swift</span> | Toronto (GTA)</p>
+  </header>
+
+
+  <main class="wrap">
+
+
+    <!-- 1. Executive Summary -->
+    <div id="exec" class="bi">
+      <section class="card">
+        <div class="i18n i18n-en">
+        <h2 class="section-title">1) Executive Summary <span class="rule"></span></h2>
+        <p><strong>Topping Courier Inc.</strong> launches the <strong>NAS Method™</strong> pilot in <strong>Toronto (GTA)</strong>, focusing on AI‑first, secure, and swift last‑mile delivery for B2B and e‑commerce clients. The pilot establishes operational excellence, brand presence, and unit economics for future scale across Canada.</p>
+        <div class="grid grid-3">
+          <div class="callout"><b class="gold-text">Pilot Hub</b><br/>Toronto (GTA)</div>
+          <div class="callout"><b class="gold-text">Method</b><br/>NAS = Network · AI · Secure & Swift</div>
+          <div class="callout"><b class="gold-text">Focus</b><br/>2–4h local • same‑day</div>
+        </div>
+      </div>
+        <div class="i18n i18n-fa" dir="rtl">
+        <h2 class="section-title">۱) خلاصه اجرایی <span class="rule"></span></h2>
+        <p><strong>تاپینگ کوریر</strong> نسخه آزمایشی <strong>متد NAS™</strong> را در <strong>تورنتو (GTA)</strong> اجرا می‌کند؛ تمرکز بر تحویل محلی سریع، امن و AI‑محور برای مشتریان B2B و فروشگاه‌های آنلاین. این پایلوت، مبنای استاندارد عملیاتی و اقتصاد واحد برای توسعه در کانادا را می‌سازد.</p>
+        <div class="grid grid-3">
+          <div class="callout"><b class="gold-text">هاب پایلوت</b><br/>تورنتو (GTA)</div>
+          <div class="callout"><b class="gold-text">روش</b><br/>NAS = شبکه · هوش مصنوعی · امن و سریع</div>
+          <div class="callout"><b class="gold-text">تمرکز</b><br/>۲–۴ ساعت محلی • همان‌روز</div>
+        </div>
+      </div>
+      </section>
+    </div>
+
+
+    <!-- 2. Mission & NAS DNA -->
+    <div id="nas" class="bi">
+      <section class="card">
+        <div class="i18n i18n-en">
+        <h2 class="section-title">2) Mission & NAS DNA <span class="rule"></span></h2>
+        <h3>Mission</h3>
+        <p>Build Toronto's most reliable AI‑powered delivery network with transparent SLAs and proactive communications.</p>
+        <h3>NAS DNA</h3>
+        <div class="grid grid-2">
+          <div class="callout">
+            <b>Network</b>: local partners & drivers • hub & spoke ops.<br/>
+            <b>Secure</b>: insured parcels • digital POD • data encryption.
+          </div>
+          <div class="callout">
+            <b>AI</b>: dispatch automation • predictive ETA • KPI alerts.<br/>
+            <b>Swift</b>: 2–4h urban • same‑day & next‑day.
+          </div>
+        </div>
+      </div>
+        <div class="i18n i18n-fa" dir="rtl">
+        <h2 class="section-title">۲) مأموریت و DNA NAS <span class="rule"></span></h2>
+        <h3>مأموریت</h3>
+        <p>ایجاد قابل‌اعتمادترین شبکه تحویل AI‑محور تورنتو با SLA شفاف و ارتباطات پیش‌دستانه.</p>
+        <h3>DNA NAS</h3>
+        <div class="grid grid-2">
+          <div class="callout">
+            <b>Network</b>: شرکای محلی و رانندگان • هاب و اسپوک.<br/>
+            <b>Secure</b>: بیمه مرسوله • رسید دیجیتال • رمزنگاری داده.
+          </div>
+          <div class="callout">
+            <b>AI</b>: اتوماسیون دیسپاچ • ETA پیش‌بینی‌شده • هشدار KPI.<br/>
+            <b>Swift</b>: ۲–۴ ساعت شهری • همان‌روز و روزبعد.
+          </div>
+        </div>
+      </div>
+      </section>
+    </div>
+
+
+    <!-- 3. Market (GTA only) -->
+    <div id="market" class="bi">
+      <section class="card">
+        <div class="i18n i18n-en">
+        <h2 class="section-title">3) GTA Market Snapshot <span class="rule"></span></h2>
+        <ul>
+          <li>E‑commerce growth → higher last‑mile demand.</li>
+          <li>Rising expectations for same‑day and real‑time tracking.</li>
+          <li>SMBs need bilingual service and transparent pricing.</li>
+          <li>Controlled‑temp & secure documents are niche upsides.</li>
+        </ul>
+      </div>
+        <div class="i18n i18n-fa" dir="rtl">
+        <h2 class="section-title">۳) نمای بازار GTA <span class="rule"></span></h2>
+        <ul>
+          <li>رشد تجارت الکترونیک → افزایش تقاضای لاست‑مایل.</li>
+          <li>انتظارات رو به رشد برای همان‌روز و ردیابی لحظه‌ای.</li>
+          <li>نیاز کسب‌وکارهای کوچک/متوسط به خدمات دوزبانه و قیمت شفاف.</li>
+          <li>خدمات کنترل دما و اسناد محرمانه مزیت‌های خاص هستند.</li>
+        </ul>
+      </div>
+      </section>
+    </div>
+
+
+    <!-- 4. Competition -->
+    <div id="comp" class="bi">
+      <section class="card">
+        <div class="i18n i18n-en">
+        <h2 class="section-title">4) Competitive Landscape (GTA) <span class="rule"></span></h2>
+        <ul>
+          <li><b>FedEx</b>: national network, slower for ad‑hoc local.</li>
+          <li><b>Purolator</b>: strong Canada presence, standard SLAs.</li>
+          <li><b>Stallion Express</b>: e‑commerce oriented pricing, limited AI.</li>
+        </ul>
+        <div class="callout">
+          <b class="gold-text">Our GTA Advantage</b>
+          <ul>
+            <li>Localized dispatch & dynamic pricing.</li>
+            <li>Clear SLAs • proactive notifications • bilingual support.</li>
+            <li>AI‑routed 2–4h delivery windows for urban zones.</li>
+          </ul>
+        </div>
+      </div>
+        <div class="i18n i18n-fa" dir="rtl">
+        <h2 class="section-title">۴) فضای رقابتی (GTA) <span class="rule"></span></h2>
+        <ul>
+          <li><b>FedEx</b>: شبکه ملی؛ کندتر برای سفارش‌های فوریتی محلی.</li>
+          <li><b>Purolator</b>: حضور قوی کانادا؛ SLA استاندارد.</li>
+          <li><b>Stallion Express</b>: تمرکز بر تجارت الکترونیک؛ AI محدود.</li>
+        </ul>
+        <div class="callout">
+          <b class="gold-text">مزیت ما در GTA</b>
+          <ul>
+            <li>دیسپاچ محلی و قیمت‌گذاری پویا.</li>
+            <li>SLA شفاف • اعلان‌های پیش‌دستانه • دوزبانه.</li>
+            <li>تحویل ۲–۴ ساعته با مسیر‌یابی AI در زون‌های شهری.</li>
+          </ul>
+        </div>
+      </div>
+      </section>
+    </div>
+
+
+    <!-- 5. NAS Engine -->
+    <div id="engine" class="bi">
+      <section class="card">
+        <div class="i18n i18n-en">
+        <h2 class="section-title">5) The NAS Engine (Pilot v1) <span class="rule"></span></h2>
+        <div class="grid grid-2">
+          <div class="callout">
+            <b>Dispatch AI</b>: real‑time allocation & routing.<br/>
+            <b>Predictive ETA</b>: ~95% accuracy.<br/>
+            <b>Smart Pricing</b>: SLA/zone/peaks.
+          </div>
+          <div class="callout">
+            <b>KPI Intelligence</b>: SLA & margin alerts.<br/>
+            <b>CRM/Webhooks</b>: Shopify, Woo, WMS.<br/>
+            <b>Security</b>: data encryption • digital POD.
+          </div>
+        </div>
+      </div>
+        <div class="i18n i18n-fa" dir="rtl">
+        <h2 class="section-title">۵) موتور NAS (نسخه پایلوت) <span class="rule"></span></h2>
+        <div class="grid grid-2">
+          <div class="callout">
+            <b>Dispatch AI</b>: تخصیص و مسیر‌دهی لحظه‌ای.<br/>
+            <b>ETA پیش‌بینی‌شده</b>: دقت ~۹۵٪.<br/>
+            <b>قیمت‌گذاری هوشمند</b>: بر اساس SLA/زون/پیک.
+          </div>
+          <div class="callout">
+            <b>هوش KPI</b>: هشدار SLA و حاشیه سود.<br/>
+            <b>اتصال CRM</b>: Shopify، Woo، WMS.<br/>
+            <b>امنیت</b>: رمزنگاری داده • رسید دیجیتال.
+          </div>
+        </div>
+      </div>
+      </section>
+    </div>
+
+
+    <!-- 6. Model -->
+    <div id="model" class="bi">
+      <section class="card">
+        <div class="i18n i18n-en">
+        <h2 class="section-title">6) Business & Revenue Model (Pilot) <span class="rule"></span></h2>
+        <ul>
+          <li>Local & Express Deliveries (2–4h, same‑day).</li>
+          <li>B2B subscriptions for recurring SMBs.</li>
+          <li>Revenue streams: delivery fees, subscription, API access.</li>
+          <li>Rep model: <b>70% rep / 30% brand</b> (branding, platform, training).</li>
+        </ul>
+      </div>
+        <div class="i18n i18n-fa" dir="rtl">
+        <h2 class="section-title">۶) مدل کسب‌وکار و درآمد (پایلوت) <span class="rule"></span></h2>
+        <ul>
+          <li>ارسال‌های محلی و اکسپرس (۲–۴ ساعت، همان‌روز).</li>
+          <li>اشتراک B2B برای سفارش‌های تکراری کسب‌وکارها.</li>
+          <li>جریان‌های درآمد: کارمزد ارسال، اشتراک، دسترسی API.</li>
+          <li>مدل نماینده: <b>۷۰٪ نماینده / ۳۰٪ برند</b> (برند، پلتفرم، آموزش).</li>
+        </ul>
+      </div>
+      </section>
+    </div>
+
+
+    <!-- 7. Financials (Pilot) -->
+    <div id="finance" class="bi">
+      <section class="card">
+        <div class="i18n i18n-en">
+        <h2 class="section-title">7) Financial Snapshot (First 6–12 Months) <span class="rule"></span></h2>
+        <div class="grid grid-2">
+          <div class="callout">
+            <b>Targets</b>
+            <ul>
+              <li>Monthly orders: 300–600 → stretch 1,000</li>
+              <li>Gross margin: ~40%</li>
+              <li>CAC payback: ≤ 2 months</li>
+            </ul>
+          </div>
+          <div class="callout">
+            <b>Illustrative Split</b>
+            <ul>
+              <li>GMV: CAD 30k–60k / mo (stretch 100k)</li>
+              <li>Rep (70%): CAD 21k–42k</li>
+              <li>Brand (30%): CAD 9k–18k</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+        <div class="i18n i18n-fa" dir="rtl">
+        <h2 class="section-title">۷) نما مالی (۶–۱۲ ماه اول) <span class="rule"></span></h2>
+        <div class="grid grid-2">
+          <div class="callout">
+            <b>اهداف</b>
+            <ul>
+              <li>تعداد ماهانه سفارش: ۳۰۰–۶۰۰ → سقف ۱۰۰۰</li>
+              <li>حاشیه سود ناخالص: حدود ۴۰٪</li>
+              <li>بازگشت CAC: ≤ ۲ ماه</li>
+            </ul>
+          </div>
+          <div class="callout">
+            <b>تقسیم نمونه‌ای</b>
+            <ul>
+              <li>ارزش کل فروش: ۳۰–۶۰ هزار دلار کانادا / ماه (سقف ۱۰۰هزار)</li>
+              <li>نماینده (۷۰٪): ۲۱–۴۲ هزار دلار</li>
+              <li>برند (۳۰٪): ۹–۱۸ هزار دلار</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      </section>
+    </div>
+
+
+    <!-- 8. Action Checklist -->
+    <div id="checklist" class="bi">
+      <section class="card">
+        <div class="i18n i18n-en">
+        <h2 class="section-title">8) Toronto Pilot Action Checklist <span class="rule"></span></h2>
+        <p style="margin-bottom: 20px;">Track your progress on the Toronto pilot launch. Check off completed tasks:</p>
+        
+        <h3 style="color: var(--gold); margin-top: 20px;">🏗️ Foundation Setup</h3>
+        <div style="background: rgba(212,175,55,0.05); padding: 15px; border-radius: 12px; margin-bottom: 15px;">
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>Secure Toronto office space (1500 sq ft)</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>Register company in Ontario</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>Obtain commercial transport licenses</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>Secure liability insurance ($2M)</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>Setup IT infrastructure & office equipment</span>
+          </label>
+        </div>
+
+        <h3 style="color: var(--gold); margin-top: 20px;">👥 Team Hiring</h3>
+        <div style="background: rgba(212,175,55,0.05); padding: 15px; border-radius: 12px; margin-bottom: 15px;">
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>Hire Operations Manager</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>Hire 2 Dispatchers</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>Hire IT Specialist</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>Hire Customer Service Rep</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>Recruit 15–20 independent drivers</span>
+          </label>
+        </div>
+
+        <h3 style="color: var(--gold); margin-top: 20px;">🌐 Network Partnerships</h3>
+        <div style="background: rgba(212,175,55,0.05); padding: 15px; border-radius: 12px; margin-bottom: 15px;">
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>Sign FedEx partnership agreement</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>Sign Purolator partnership agreement</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>Establish Air Canada Cargo connection</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>Onboard 5–10 local SMB clients</span>
+          </label>
+        </div>
+
+        <h3 style="color: var(--gold); margin-top: 20px;">🤖 Technology & AI</h3>
+        <div style="background: rgba(212,175,55,0.05); padding: 15px; border-radius: 12px; margin-bottom: 15px;">
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>Deploy dispatch AI system</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>Implement predictive ETA engine</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>Setup driver mobile app</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>Integrate CRM/Webhooks (Shopify, WooCommerce)</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>Setup KPI dashboard & alerts</span>
+          </label>
+        </div>
+
+        <h3 style="color: var(--gold); margin-top: 20px;">🚀 Launch & Operations</h3>
+        <div style="background: rgba(212,175,55,0.05); padding: 15px; border-radius: 12px; margin-bottom: 15px;">
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>Complete driver training program</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>Launch soft pilot (50 deliveries/week)</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>Scale to 300–600 orders/month</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>Achieve 95%+ on-time delivery rate</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>Reach 40% gross margin target</span>
+          </label>
+        </div>
+
+        <div class="callout" style="margin-top: 20px; text-align: center;">
+          <b class="gold-text" style="font-size: 18px;">Progress: <span id="progress-en">0</span>/25 tasks completed</b>
+        </div>
+      </div>
+        <div class="i18n i18n-fa" dir="rtl">
+        <h2 class="section-title">۸) چک‌لیست اقدامات پایلوت تورنتو <span class="rule"></span></h2>
+        <p style="margin-bottom: 20px;">پیشرفت خود را در راه‌اندازی پایلوت تورنتو دنبال کنید. کارهای انجام شده را تیک بزنید:</p>
+        
+        <h3 style="color: var(--gold); margin-top: 20px;">🏗️ راه‌اندازی بنیاد</h3>
+        <div style="background: rgba(212,175,55,0.05); padding: 15px; border-radius: 12px; margin-bottom: 15px;">
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>تأمین فضای اداری تورنتو (۱۵۰۰ فوت مربع)</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>ثبت شرکت در انتاریو</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>اخذ مجوزهای حمل‌ونقل تجاری</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>تأمین بیمه مسئولیت (۲ میلیون دلار)</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>راه‌اندازی زیرساخت IT و تجهیزات اداری</span>
+          </label>
+        </div>
+
+        <h3 style="color: var(--gold); margin-top: 20px;">👥 استخدام تیم</h3>
+        <div style="background: rgba(212,175,55,0.05); padding: 15px; border-radius: 12px; margin-bottom: 15px;">
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>استخدام مدیر عملیات</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>استخدام ۲ دیسپچر</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>استخدام متخصص IT</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>استخدام نماینده خدمات مشتری</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>جذب ۱۵–۲۰ راننده مستقل</span>
+          </label>
+        </div>
+
+        <h3 style="color: var(--gold); margin-top: 20px;">🌐 شراکت‌های شبکه</h3>
+        <div style="background: rgba(212,175,55,0.05); padding: 15px; border-radius: 12px; margin-bottom: 15px;">
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>امضای قرارداد شراکت با FedEx</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>امضای قرارداد شراکت با Purolator</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>برقراری ارتباط با Air Canada Cargo</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>جذب ۵–۱۰ مشتری محلی SMB</span>
+          </label>
+        </div>
+
+        <h3 style="color: var(--gold); margin-top: 20px;">🤖 فناوری و هوش مصنوعی</h3>
+        <div style="background: rgba(212,175,55,0.05); padding: 15px; border-radius: 12px; margin-bottom: 15px;">
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>استقرار سیستم دیسپاچ AI</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>پیاده‌سازی موتور پیش‌بینی ETA</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>راه‌اندازی اپلیکیشن موبایل رانندگان</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>یکپارچه‌سازی CRM/Webhooks (Shopify, WooCommerce)</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>راه‌اندازی داشبورد KPI و هشدارها</span>
+          </label>
+        </div>
+
+        <h3 style="color: var(--gold); margin-top: 20px;">🚀 راه‌اندازی و عملیات</h3>
+        <div style="background: rgba(212,175,55,0.05); padding: 15px; border-radius: 12px; margin-bottom: 15px;">
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>تکمیل برنامه آموزش رانندگان</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>راه‌اندازی پایلوت نرم (۵۰ تحویل/هفته)</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>مقیاس‌پذیری به ۳۰۰–۶۰۰ سفارش/ماه</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>دستیابی به نرخ تحویل به‌موقع ۹۵٪+</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 10px; margin: 8px 0; cursor: pointer;">
+            <input type="checkbox" class="task-check" style="width: 18px; height: 18px; cursor: pointer;">
+            <span>رسیدن به هدف حاشیه سود ۴۰٪</span>
+          </label>
+        </div>
+
+        <div class="callout" style="margin-top: 20px; text-align: center;">
+          <b class="gold-text" style="font-size: 18px;">پیشرفت: <span id="progress-fa">۰</span>/۲۵ کار انجام شده</b>
+        </div>
+      </div>
+      </section>
+    </div>
+
+    </main>
+  </main>
+  </div>
+
+  <script>
+    // Checklist functionality with localStorage persistence
+    (function() {
+      const checkboxes = document.querySelectorAll('.task-check');
+      const progressEn = document.getElementById('progress-en');
+      const progressFa = document.getElementById('progress-fa');
+      
+      // Persian number converter
+      const toPersianNum = (num) => {
+        const persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+        return String(num).split('').map(d => persianDigits[parseInt(d)] || d).join('');
+      };
+      
+      // Load saved state
+      checkboxes.forEach((checkbox, index) => {
+        const saved = localStorage.getItem(`toronto-task-${index}`);
+        if (saved === 'true') {
+          checkbox.checked = true;
+        }
+        
+        // Save on change
+        checkbox.addEventListener('change', function() {
+          localStorage.setItem(`toronto-task-${index}`, this.checked);
+          updateProgress();
+        });
+      });
+      
+      // Update progress counter
+      function updateProgress() {
+        const total = checkboxes.length / 2; // Divided by 2 because we have EN and FA versions
+        const checked = Array.from(checkboxes).filter(cb => cb.checked).length / 2;
+        if (progressEn) progressEn.textContent = Math.round(checked);
+        if (progressFa) progressFa.textContent = toPersianNum(Math.round(checked));
+      }
+      
+      updateProgress();
+    })();
+  </script>
+
+  <script>
+    // Unified i18n language toggle system
+    (function() {
+      const html = document.documentElement;
+      const body = document.body;
+      const btnEn = document.getElementById('btn-en');
+      const btnFa = document.getElementById('btn-fa');
+      
+      function applyLang(lang) {
+        const isFA = lang === 'fa';
+        
+        // Toggle body classes
+        body.classList.toggle('lang-fa', isFA);
+        body.classList.toggle('lang-en', !isFA);
+        
+        // Update HTML attributes
+        html.setAttribute('lang', isFA ? 'fa' : 'en');
+        html.setAttribute('dir', isFA ? 'rtl' : 'ltr');
+        
+        // Update button states
+        if (btnEn && btnFa) {
+          btnEn.classList.toggle('active', !isFA);
+          btnEn.setAttribute('aria-pressed', String(!isFA));
+          btnFa.classList.toggle('active', isFA);
+          btnFa.setAttribute('aria-pressed', String(isFA));
+        }
+        
+        // Store preference
+        try {
+          localStorage.setItem('lang', lang);
+        } catch(e) {
+          // localStorage might be disabled
+        }
+      }
+      
+      // Initialize with stored language or default to EN
+      let storedLang = 'en';
+      try {
+        storedLang = localStorage.getItem('lang') || 'en';
+      } catch(e) {
+        // localStorage might be disabled
+      }
+      applyLang(storedLang);
+      
+      // Attach event listeners
+      if (btnEn) btnEn.addEventListener('click', () => applyLang('en'));
+      if (btnFa) btnFa.addEventListener('click', () => applyLang('fa'));
+      
+    })();
+    
+    // Active navigation highlighting
+    (function() {
+      const navLinks = document.querySelectorAll('aside .nav a[href^="#"]');
+      
+      function updateActiveLink() {
+        const scrollPos = window.scrollY + 150;
+        let currentSection = null;
+        let closestDistance = Infinity;
+        
+        document.querySelectorAll('[id]').forEach(element => {
+          if (!element.id) return;
+          const rect = element.getBoundingClientRect();
+          const elementTop = window.scrollY + rect.top;
+          const elementBottom = elementTop + element.offsetHeight;
+          
+          if (scrollPos >= elementTop && scrollPos < elementBottom) {
+            const distance = Math.abs(scrollPos - elementTop);
+            if (distance < closestDistance) {
+              closestDistance = distance;
+              currentSection = element.id;
+            }
+          }
+        });
+        
+        navLinks.forEach(link => {
+          const href = link.getAttribute('href');
+          if (href && href.startsWith('#')) {
+            const targetId = href.substring(1);
+            if (targetId === currentSection) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          }
+        });
+      }
+      
+      let scrollTimeout;
+      window.addEventListener('scroll', function() {
+        if (scrollTimeout) clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(updateActiveLink, 50);
+      });
+      
+      window.addEventListener('hashchange', updateActiveLink);
+      setTimeout(updateActiveLink, 100);
+      
+      // Smooth scroll for sidebar links
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+          if (href && href.startsWith('#')) {
+            e.preventDefault();
+            const targetId = href.substring(1);
+            const target = document.getElementById(targetId);
+            if (target) {
+              const targetTop = window.scrollY + target.getBoundingClientRect().top - 80;
+              window.scrollTo({ top: targetTop, behavior: 'smooth' });
+              history.pushState(null, null, href);
+              setTimeout(updateActiveLink, 500);
+            }
+          }
+        });
+      });
+    })();
+  </script>
+
+  <footer>
+    <div>© <span class="gold-text">Topping Courier Inc.</span> · NAS Toronto Pilot Edition — 2025</div>
+    <div class="small">Black & Gold — Bilingual (EN/FA)</div>
+  </footer>
+</body>
+</html>

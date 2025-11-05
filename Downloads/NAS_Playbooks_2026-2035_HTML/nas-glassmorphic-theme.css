@@ -1,0 +1,486 @@
+/* ============================================================================
+   NAS Empire — Glassmorphic Black-Gold Theme
+   ============================================================================
+   
+   طراحی شیشه‌ای مشکی-طلایی برای تمام فایل‌های NAS Playbook
+   Glassmorphic Black-Gold Design for all NAS Playbook files
+   
+   ============================================================================
+*/
+
+/* ===== CSS Variables — Glassmorphic Black-Gold Theme ===== */
+:root {
+  --bg: #0b0b0f;
+  --panel: rgba(20, 20, 25, 0.5);
+  --panel-solid: #14181f;
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-hover: rgba(212, 175, 55, 0.4);
+  --line: rgba(255, 255, 255, 0.05);
+  --text: #f5f5f5;
+  --soft: #cdd6e7;
+  --gold: #d4af37;
+  --gold-dark: #8f7420;
+  --gold-darker: #5f4a12;
+  --brand: #0a58ff;
+  --green: #2ecc71;
+  --amber: #ffb020;
+  --red: #ff5a67;
+  --blur: 18px;
+  --shadow-gold: 0 0 20px rgba(212, 175, 55, 0.15);
+  --shadow-gold-hover: 0 0 30px rgba(212, 175, 55, 0.3);
+}
+
+/* ===== Base Styles ===== */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: radial-gradient(circle at top left, #000000, #0b0b0f);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ===== Layout ===== */
+.layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 100vh;
+}
+
+aside {
+  background: rgba(11, 11, 15, 0.8);
+  -webkit-backdrop-filter: blur(var(--blur));
+  backdrop-filter: blur(var(--blur));
+  border-right: 1px solid var(--glass-border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: auto;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+}
+
+main {
+  padding: 24px;
+  position: relative;
+}
+
+/* ===== Logo & Branding ===== */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  border-bottom: 1px solid var(--glass-border);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), transparent);
+}
+
+.mark {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: radial-gradient(60% 60% at 30% 30%, var(--gold), var(--gold-dark) 60%, var(--gold-darker));
+  position: relative;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.2);
+  animation: pulse-gold 3s ease-in-out infinite;
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.2); }
+  50% { box-shadow: 0 6px 30px rgba(212, 175, 55, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.3); }
+}
+
+.mark::after {
+  content: "";
+  position: absolute;
+  inset: 11px;
+  border: 2px solid rgba(11, 11, 15, 0.8);
+  transform: rotate(45deg);
+  border-radius: 4px;
+}
+
+h1 {
+  font-size: 16px;
+  margin: 0;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--gold), #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sub {
+  color: var(--soft);
+  font-weight: 400;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* ===== Navigation ===== */
+.hr {
+  height: 1px;
+  background: var(--glass-border);
+  margin: 8px 16px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+}
+
+.nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--soft);
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.nav a:hover {
+  color: #fff;
+  border-color: var(--glass-border);
+  background: rgba(255, 255, 255, 0.05);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.nav a:hover::before {
+  opacity: 1;
+}
+
+.nav a.active,
+.nav a:target {
+  color: #fff;
+  border-color: var(--gold);
+  background: rgba(212, 175, 55, 0.15);
+  font-weight: 600;
+}
+
+.nav a.active::before,
+.nav a:target::before {
+  opacity: 1;
+}
+
+.nav .head {
+  margin: 10px 8px 6px;
+  color: var(--gold);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+/* ===== Buttons & Controls — Glassmorphic Gold ===== */
+.pill {
+  margin: 10px 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  flex: 1;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(143, 116, 32, 0.2));
+  border: 1px solid var(--glass-border);
+  color: var(--soft);
+  padding: 8px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 12px;
+  transition: all 0.3s ease;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 999px;
+}
+
+.btn:hover {
+  border-color: var(--gold);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn.active {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: #000;
+  border-color: var(--gold);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  font-weight: 700;
+}
+
+.btn.active::before {
+  opacity: 1;
+}
+
+.export {
+  margin: 0 16px 12px;
+}
+
+/* ===== Content Layout — Glassmorphic Cards ===== */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.breadcrumbs {
+  color: var(--soft);
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.card {
+  background: var(--panel);
+  -webkit-backdrop-filter: blur(var(--blur));
+  backdrop-filter: blur(var(--blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: var(--shadow-gold);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover {
+  border-color: var(--glass-border-hover);
+  box-shadow: var(--shadow-gold-hover);
+  transform: translateY(-2px);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+section {
+  margin: 18px 0;
+}
+
+section h2 {
+  font-size: 18px;
+  margin: 0 0 10px;
+  background: linear-gradient(135deg, var(--gold), #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+h3 {
+  margin: 10px 0 8px;
+  font-size: 15px;
+  color: var(--text);
+  font-weight: 600;
+}
+
+p, li {
+  color: #dbe2f1;
+  line-height: 1.6;
+}
+
+.grid {
+  display: grid;
+  gap: 12px;
+}
+
+.g2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.g3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* ===== Tables ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+th, td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+thead th {
+  background: rgba(15, 20, 33, 0.6);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--gold);
+  text-align: left;
+  font-weight: 600;
+}
+
+tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* ===== Components ===== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--glass-border);
+  background: rgba(15, 20, 33, 0.5);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  padding: 5px 8px;
+  border-radius: 999px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.progress {
+  height: 10px;
+  background: rgba(15, 20, 33, 0.6);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.bar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+  transition: width 0.9s ease;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+/* ===== Internationalization (i18n) ===== */
+.i18n {
+  display: none;
+}
+
+.i18n.block {
+  display: none;
+}
+
+body.lang-en .i18n-en {
+  display: inline;
+}
+
+body.lang-en .i18n-en.block {
+  display: block;
+}
+
+body.lang-fa .i18n-fa {
+  display: inline;
+}
+
+body.lang-fa .i18n-fa.block {
+  display: block;
+}
+
+body.lang-fa {
+  font-family: Vazirmatn, Inter, sans-serif;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 1000px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .g3 {
+    grid-template-columns: 1fr;
+  }
+  
+  .layout {
+    grid-template-columns: 72px 1fr;
+  }
+  
+  .logo h1,
+  .logo .sub {
+    display: none;
+  }
+  
+  .nav .head {
+    display: none;
+  }
+}
+
+/* ===== Print Styles ===== */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .card {
+    border: 1px solid #ccc;
+    box-shadow: none;
+    background: white;
+  }
+  
+  .btn, .pill, .export {
+    display: none;
+  }
+}
